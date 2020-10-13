@@ -1,2 +1,4 @@
 # EI1022
-Ejemplo para ver como se diferencian las diferentes ramas
+Repositorio de la asignatura EI1022.
+Contiene los directorios de Teoría con los programas utilizados en esta así como también los de prácticas 
+el Laboratorio y los Problemas.
