@@ -19,16 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/demo_labyrinthviewerPau.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/graph2dviewerPau.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/labyrinthviewerPau.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/EI1022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EI1022.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="Separados los labs por directorios">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/demo_labyrinthviewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/demo_labyrinthviewerGonzalo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/graph2dviewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/graph2dviewerGonzalo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/labyrinthviewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/labyrinthviewerGonzalo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/demo_labyrinthviewerGonzalo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/demo_labyrinthviewerGonzalo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,15 +52,39 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../easycanvas/src" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gonin\PycharmProjects\EI1022\Practicas\Problemas\Practica1Gonzalo" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Practicas/Problemas/Practica1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.graph2dviewer">
+  <component name="RunManager" selected="Python.demo_labyrinthviewerGonzalo">
+    <configuration name="demo_labyrinthviewerGonzalo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="EI1022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/demo_labyrinthviewerGonzalo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="graph2dviewer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EI1022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -152,34 +169,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="prueba8" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="EI1022" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Laboratorio" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Laboratorio/prueba8.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.demo_labyrinthviewerGonzalo" />
         <item itemvalue="Python.graph2dviewer" />
         <item itemvalue="Python.labyrinthviewer" />
         <item itemvalue="Python.prueba" />
         <item itemvalue="Python.prueba8 (1)" />
-        <item itemvalue="Python.prueba8" />
       </list>
     </recent_temporary>
   </component>
@@ -209,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602592708729</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Separados los labs por directorios">
+      <created>1602598659038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602598659038</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -232,7 +235,8 @@
     </ignored-roots>
     <MESSAGE value="Clases necesarias para Laberinto" />
     <MESSAGE value="Ajuste Bibliotecas Algoritmia y EasyCanvas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajuste Bibliotecas Algoritmia y EasyCanvas" />
+    <MESSAGE value="Separados los labs por directorios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separados los labs por directorios" />
   </component>
   <component name="WindowStateProjectService">
     <state x="184" y="112" width="1071" height="696" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601389628273">
@@ -247,6 +251,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="344" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1602597850180" />
+    <state x="507" y="190" key="FileChooserDialogImpl" timestamp="1602599189015">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="507" y="190" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602599189015" />
     <state width="1419" height="244" key="GridCell.Tab.0.bottom" timestamp="1602592892227">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -267,11 +275,15 @@
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067316" />
     <state width="1419" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602592892226" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1602592660435">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="236" y="81" key="SettingsEditor" timestamp="1602599197743">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602592660435" />
-    <state x="236" y="81" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602591240574" />
+    <state x="236" y="81" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602599197743" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1602598665233">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1602598665233" />
     <state x="397" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1602587299372">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
