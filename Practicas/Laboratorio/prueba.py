@@ -1,3 +1,4 @@
+import algoritmia
 #Prueba de Pyhton
 a = int(input("Introduce a: "))
 b = int(input("Introduce b: "))

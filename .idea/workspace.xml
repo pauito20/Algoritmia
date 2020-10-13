@@ -19,7 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="" />
+    <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1/demo_labyrinthviewer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1/graph2dviewer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1/labyrinthviewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practicas/Laboratorio/prueba.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algoritmia" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easycanvas" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +177,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -187,7 +196,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -205,6 +216,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="415" y="64" key="#prueba_(1)/0.0.1440.900@0.0.1440.900" timestamp="1601451746381" />
+    <state x="344" y="51" key="CommitChangelistDialog2" timestamp="1602591467729">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="344" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1602591467729" />
     <state width="1419" height="244" key="GridCell.Tab.0.bottom" timestamp="1602589762529">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -225,10 +240,10 @@
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067316" />
     <state width="1419" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602589762528" />
-    <state x="236" y="81" key="SettingsEditor" timestamp="1602591240574">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="221" y="89" key="SettingsEditor" timestamp="1602591439360">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602589795379" />
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602591439360" />
     <state x="236" y="81" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602591240574" />
     <state x="397" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1602587299372">
       <screen x="0" y="0" width="1440" height="900" />
