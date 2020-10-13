@@ -14,7 +14,7 @@ Representamos un laberinto mediante un grafo no dirigido con las siguientes cara
 
 '''
 from algoritmia.datastructures.digraphs import UndirectedGraph
-from labyrinthviewer import LabyrinthViewer
+from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
 
 if __name__ == '__main__':
     e = [((4, 7), (4, 6)), ((4, 7), (4, 8)), ((1, 3), (0, 3)), ((1, 3), (1, 4)), ((4, 8), (4, 9)), ((3, 0), (2, 0)), 
