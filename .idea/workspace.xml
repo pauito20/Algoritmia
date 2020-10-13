@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/EI1022.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba5.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba6.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba7.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba6.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba7.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parcticas/Laboratorio/prueba8.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Laboratorio/prueba8.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
