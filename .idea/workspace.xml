@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="Fichero Prueba pau">
-      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/problema1Pau.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/problema1Pau.py" beforeDir="false" afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/problema1Pau.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,7 @@
       <recent name="C:\Users\gonin\PycharmProjects\EI1022\Practicas\Problemas\Practica1Gonzalo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.graph2dviewerPau">
+  <component name="RunManager" selected="Python.problema1Pau">
     <configuration name="demo_labyrinthviewerGonzalo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EI1022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,27 +106,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="graph2dviewer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="EI1022" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Problemas/Practica1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1/graph2dviewer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="graph2dviewerPau" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EI1022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,6 +119,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/graph2dviewerPau.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="problema1Pau" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="EI1022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/problema1Pau.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -171,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.problema1Pau" />
         <item itemvalue="Python.graph2dviewerPau" />
         <item itemvalue="Python.demo_labyrinthviewerPau" />
         <item itemvalue="Python.prueba1Pau" />
         <item itemvalue="Python.demo_labyrinthviewerGonzalo" />
-        <item itemvalue="Python.graph2dviewer" />
       </list>
     </recent_temporary>
   </component>
@@ -260,26 +260,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="190" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602599189015" />
-    <state width="1419" height="244" key="GridCell.Tab.0.bottom" timestamp="1602600803100">
+    <state width="1419" height="244" key="GridCell.Tab.0.bottom" timestamp="1602658485503">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.bottom/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067317" />
-    <state width="1419" height="244" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602600803100" />
-    <state width="1419" height="244" key="GridCell.Tab.0.center" timestamp="1602600803097">
+    <state width="1419" height="244" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1602658485503" />
+    <state width="1419" height="244" key="GridCell.Tab.0.center" timestamp="1602658485502">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.center/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067315" />
-    <state width="1419" height="244" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602600803097" />
-    <state width="1419" height="244" key="GridCell.Tab.0.left" timestamp="1602600803095">
+    <state width="1419" height="244" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1602658485502" />
+    <state width="1419" height="244" key="GridCell.Tab.0.left" timestamp="1602658485501">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.left/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067314" />
-    <state width="1419" height="244" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602600803095" />
-    <state width="1419" height="244" key="GridCell.Tab.0.right" timestamp="1602600803098">
+    <state width="1419" height="244" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1602658485501" />
+    <state width="1419" height="244" key="GridCell.Tab.0.right" timestamp="1602658485502">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1440" height="251" key="GridCell.Tab.0.right/-1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1601413067316" />
-    <state width="1419" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602600803098" />
+    <state width="1419" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1602658485502" />
     <state x="236" y="81" key="SettingsEditor" timestamp="1602599197743">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -9,7 +9,10 @@ def create_labyrinth(rows,cols):
     for i in range(rows):
         for j in range(cols):
             vertices.append((i, j))
-    #Opción pro: vertices = [(r, c) for i in range(rows) for c in range(cols]
+    '''
+    Opción pro: vertices = [(r, c) for i in range(rows) for c in range(cols)]
+    '''
+
 
 
     #Creamos un MFSet y le añadimos uno a uno los vertices de la lista "vertices"
@@ -60,3 +63,28 @@ def create_labyrinth(rows,cols):
 
     #Devolvemos el grafo resultante
     return UndirectedGraph(E = corridors)
+
+
+############ ---------- Programa Principal ---------- ############
+
+if __name__ == '__main__':
+
+    #Creamos el grafo con la función utilizada anteriormente
+    graph = create_labyrinth(100, 100)
+
+    # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+    lv = LabyrinthViewer(graph, canvas_width=1100, canvas_height=800, margin=20)
+
+    # Opcional: Muestra el símbolo 'I' en la celda de entrada al laberinto
+    lv.set_input_point((0, 0))
+
+    # Opcional: Visualiza el símbolo 'O' en la celda de salida del laberinto
+    lv.set_output_point((4, 9))
+
+
+
+    # Obligatorio: Muestra el laberinto
+    lv.run()
+
+
+
