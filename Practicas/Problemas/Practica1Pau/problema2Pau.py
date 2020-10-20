@@ -1,5 +1,7 @@
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from algoritmia.datastructures.mergefindsets import MergeFindSet
+from algoritmia.datastructures.queues import Fifo
+
 from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
 import random
 
@@ -24,7 +26,6 @@ def path(g: UndirectedGraph, source: Vertex, target: Vertex) -> List[Vertex]:
     aristas = []
     seen = set()
     recorrido_profundidad(source, source)
-    print(aristas)
     return recover_path(aristas, target)
 
 
@@ -47,13 +48,31 @@ def recover_path(edges: List[Edge], target: Vertex):
     path.reverse()
     return path
 
+'''RECORREMOS EL LABERINTO EN ANCHURA, ENCONTRANDO CAMINO MÁS CORTO POSIBLE'''
+
+
+def shortest_path(g: UndirectedGraph, source: Vertex, target: Vertex) -> List[Vertex]:
+    aristas = []
+    queue = Fifo()
+    seen = set()
+    queue.push((source, source))
+    seen.add(source)
+    while len(queue) > 0:
+        u, v = queue.pop()
+        aristas.append((u, v))
+        for suc in g.succs(v):
+            if suc not in seen:
+                seen.add(suc)
+                queue.push((v, suc))
+
+    return recover_path(aristas, target)
 
 
 
 '''CREAMOS UN LABERINTO'''
 
 
-def create_labyrinth(rows, cols):
+def create_labyrinth(rows, cols, n=0):
     # Creamos una lista de vértices (celdas del laberinto)
     vertices = []
     for i in range(rows):
@@ -106,6 +125,10 @@ def create_labyrinth(rows, cols):
         if cu != cv:
             corridors.append((u, v))
             mfs.merge(u, v)
+        elif n > 0:
+            #Utilizamos para que haya más caminos en el laberinto
+            corridors.append((u, v))
+            n -= 1
 
     # Devolvemos el grafo resultante
     return UndirectedGraph(E=corridors)
@@ -114,16 +137,19 @@ def create_labyrinth(rows, cols):
 ''' ############ ---------- Programa Principal ---------- ############ '''
 if __name__ == '__main__':
     # Creamos el grafo con la función utilizada anteriormente
-    graph = create_labyrinth(100, 100)
+    graph = create_labyrinth(100, 100, 1000)
 
 
     # Creamos un camino mediante el recorrido en profundidad y lo pintamos en azul
     ini = (0, 0)
     fin = (99, 99)
     camino = path(graph, ini, fin)
+    shortest_camino = shortest_path(graph, ini, fin)
 
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
     lv = LabyrinthViewer(graph, canvas_width=1100, canvas_height=800, margin=20)
     lv.add_path(camino, 'blue')
+    lv.add_path(shortest_camino, 'red', offset = 3)
+
     # Obligatorio: Muestra el laberinto
     lv.run()
