@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c2282ab-7574-4b5b-a941-2fc1c8da1200" name="Default Changelist" comment="Separados los labs por directorios">
-      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Pau/problema2Pau.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/problema2Gonzalo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/EI1022.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EI1022.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -66,7 +66,7 @@
       <recent name="$PROJECT_DIR$/Practicas/Problemas/Practica1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.problema2Pau">
+  <component name="RunManager" selected="Python.problema2Gonzalo">
     <configuration name="demo_labyrinthviewerGonzalo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EI1022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,27 +109,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="graph2dviewer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="EI1022" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Problemas/Practica1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1/graph2dviewer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="problema1Gonzalo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EI1022" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -143,6 +122,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/problema1Gonzalo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="problema2Gonzalo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="EI1022" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Practicas/Problemas/Practica1Gonzalo/problema2Gonzalo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,15 +174,15 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.problema2Gonzalo" />
         <item itemvalue="Python.problema2Pau" />
         <item itemvalue="Python.demo_labyrinthviewerPau" />
         <item itemvalue="Python.problema1Gonzalo" />
         <item itemvalue="Python.demo_labyrinthviewerGonzalo" />
-        <item itemvalue="Python.graph2dviewer" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -223,13 +223,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -243,6 +242,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Separados los labs por directorios" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="91" key="#Inspections" timestamp="1603206857197">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="91" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1603206857197" />
     <state x="184" y="112" width="1071" height="696" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601389628273">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -287,11 +290,11 @@
     <state width="1419" height="245" key="GridCell.Tab.0.right/-960.234.960.704/0.0.1440.900@0.0.1440.900" timestamp="1603202586031" />
     <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1603206568094" />
     <state width="1515" height="121" key="GridCell.Tab.0.right/0.0.1536.824/1920.359.1280.680@0.0.1536.824" timestamp="1602689756188" />
-    <state x="236" y="81" key="SettingsEditor" timestamp="1602599197743">
+    <state x="236" y="81" key="SettingsEditor" timestamp="1603206875641">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1602592660435" />
-    <state x="236" y="81" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602599197743" />
+    <state x="236" y="81" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603206875641" />
     <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1602598665233">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
