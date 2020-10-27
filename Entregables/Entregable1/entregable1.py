@@ -65,6 +65,11 @@ if __name__ == '__main__':
     cols = info[1]
     tuplas_prohibidas = info[2]
 
+    graph = create_labyring(rows, cols, tuplas_prohibidas)
 
-    print(rows,cols,tuplas_prohibidas)
+    # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+    lv = LabyrinthViewer(graph, canvas_width=1100, canvas_height=800, margin=20)
+
+    # Obligatorio: Muestra el laberinto
+    lv.run()
 
