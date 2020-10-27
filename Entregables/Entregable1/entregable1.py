@@ -1,7 +1,6 @@
 from typing import *
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
-from algoritmia.datastructures.queues import Fifo
 from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
 
 Vertex = Tuple[int, int]
@@ -24,7 +23,6 @@ def read_file(f):
 
 def create_labyring(rows, cols, forbiden:set):
     # Creamos una lista de vértices (celdas del laberinto)
-    vertices = []
     vertices = [(r, c) for r in range(rows) for c in range(cols)]
 
     # Creamos un MFSet y le añadimos uno a uno los vertices de la lista "vertices"
@@ -42,6 +40,7 @@ def create_labyring(rows, cols, forbiden:set):
                 edges.append(((i, j), (i - 1, j)))
     # Creamos una lista vacía "corridors" que será la que contenga las aristas finales del grafo
     corridors = []
+
     # Recorremos edges y para cada arista mediante find, si son diferentes usamos merge para fusionarlas y añadimos esta a corridors
     for u, v in edges:
         cu = mfs.find(u)
