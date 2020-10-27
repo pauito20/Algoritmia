@@ -23,7 +23,8 @@ def create_labyring():
 
 
 if __name__ == '__main__':
-    file = open("lab_2_4_ok.ins", "r")
+    name_fich = input("Introduce el nombre(ruta) del fichero: ")
+    file = open(name_fich, "r")
     info = read_file(file)
     rows = info[0]
     cols = info[1]
