@@ -3,6 +3,7 @@ from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from algoritmia.datastructures.queues import Fifo
 from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
+import random
 
 Vertex = Tuple[int, int]
 Edge = Tuple[Vertex, Vertex]
@@ -24,7 +25,6 @@ def read_file(f):
 
 def create_labyring(rows, cols, forbiden:set):
     # Creamos una lista de vértices (celdas del laberinto)
-    vertices = []
     vertices = [(r, c) for r in range(rows) for c in range(cols)]
 
     # Creamos un MFSet y le añadimos uno a uno los vertices de la lista "vertices"
@@ -40,6 +40,9 @@ def create_labyring(rows, cols, forbiden:set):
                 edges.append(((i, j), (i, j - 1)))
             if i > 0:
                 edges.append(((i, j), (i - 1, j)))
+
+    random.shuffle(edges)
+
     # Creamos una lista vacía "corridors" que será la que contenga las aristas finales del grafo
     corridors = []
     # Recorremos edges y para cada arista mediante find, si son diferentes usamos merge para fusionarlas y añadimos esta a corridors
@@ -48,9 +51,10 @@ def create_labyring(rows, cols, forbiden:set):
         cv = mfs.find(v)
 
         # Aqui comprobamos si esta esa arista, si no hay que meterla
-        if cu != cv and not forbiden.__contains__((u, v)):
-            corridors.append((u, v))
-            mfs.merge(u, v)
+        if cu != cv:
+            if not forbiden.__contains__((u, v)):
+                corridors.append((u, v))
+                mfs.merge(u, v)
 
     # Devolvemos el grafo resultante
     return UndirectedGraph(E=corridors)
@@ -68,7 +72,7 @@ if __name__ == '__main__':
     graph = create_labyring(rows, cols, tuplas_prohibidas)
 
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-    lv = LabyrinthViewer(graph, canvas_width=1100, canvas_height=800, margin=20)
+    lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
     # Obligatorio: Muestra el laberinto
     lv.run()
