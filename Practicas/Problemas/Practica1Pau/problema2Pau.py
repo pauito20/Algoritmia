@@ -79,7 +79,7 @@ def create_labyrinth(rows, cols, n=0):
         for j in range(cols):
             vertices.append((i, j))
     '''
-    Opción pro: vertices = [(r, c) for i in range(rows) for c in range(cols)]
+    Opción pro: vertices = [(r, c) for r in range(rows) for c in range(cols)]
     '''
 
     # Creamos un MFSet y le añadimos uno a uno los vertices de la lista "vertices"
