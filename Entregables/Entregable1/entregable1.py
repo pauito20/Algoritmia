@@ -52,9 +52,9 @@ def create_labyring(rows, cols, forbiden:set):
 
         # Aqui comprobamos si esta esa arista, si no hay que meterla
         if cu != cv:
-            if not forbiden.__contains__((u, v)):
-                corridors.append((u, v))
-                mfs.merge(u, v)
+            #if not forbiden.__contains__((u, v)):
+            corridors.append((u, v))
+            mfs.merge(u, v)
 
     # Devolvemos el grafo resultante
     return UndirectedGraph(E=corridors)
