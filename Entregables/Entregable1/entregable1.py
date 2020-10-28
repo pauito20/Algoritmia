@@ -3,6 +3,7 @@ from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
 import random
+import os
 
 Vertex = Tuple[int, int]
 Edge = Tuple[Vertex, Vertex]
@@ -57,9 +58,11 @@ def create_labyring(rows, cols, forbiden:set):
 
         # Aqui comprobamos si esta esa arista, si no hay que meterla
         if cu != cv:
-            for f_ed in forbiden:
-                if f_ed == (u, v) or f_ed == (v, u):
-                    entra = False
+            #for f_ed in forbiden:
+                #if f_ed == (u, v) or f_ed == (v, u):
+                    #entra = False
+            if forbiden.__contains__((u,v)) or forbiden.__contains__((v,u)):
+                entra = False
 
             if entra:
                 corridors.append((u, v))
@@ -74,26 +77,24 @@ def create_labyring(rows, cols, forbiden:set):
 
 if __name__ == '__main__':
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
-    file = open(name_fich, "r")
-    info = read_file(file)
-    rows = info[0]
-    cols = info[1]
-    tuplas_prohibidas = info[2]
 
-    random.seed(50)
+    if not os.path.isfile(name_fich):
+        print("El parametro introducido no es un fichero.")
+        exit(0)
+    else:
+        file = open(name_fich, "r")
+        info = read_file(file)
+        rows = info[0]
+        cols = info[1]
+        tuplas_prohibidas = info[2]
 
+        random.seed(50)
 
-    graph = create_labyring(rows, cols, tuplas_prohibidas)
+        graph = create_labyring(rows, cols, tuplas_prohibidas)
 
+        # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+        lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
-
-
-    # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-    lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
-
-
-
-
-    # Obligatorio: Muestra el laberinto
-    lv.run()
+        # Obligatorio: Muestra el laberinto
+        lv.run()
 
