@@ -27,7 +27,7 @@ def create_labyrinth(rows,cols):
     for i in range(rows):
         for j in range(cols):
             if j > 0:
-                edges.append(((i, j),(i, j-1)))
+                edges.append(((i, j), (i, j-1)))
             if i > 0:
                 edges.append(((i, j), (i -1, j)))
     #Otra forma
@@ -50,7 +50,7 @@ def create_labyrinth(rows,cols):
 
 
     #Creamos una lista vacía "corridors" que será la que contenga las aristas finales del grafo
-    corridors=[]
+    corridors = []
 
     #Recorremos edges y para cada arista mediante find, si son diferentes usamos merge para fusionarlas y añadimos esta a corridors
     for u, v in edges:
@@ -62,7 +62,7 @@ def create_labyrinth(rows,cols):
             mfs.merge(u, v)
 
     #Devolvemos el grafo resultante
-    return UndirectedGraph(E = corridors)
+    return UndirectedGraph(E=corridors)
 
 
 ############ ---------- Programa Principal ---------- ############

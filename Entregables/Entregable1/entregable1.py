@@ -9,12 +9,15 @@ Edge = Tuple[Vertex, Vertex]
 
 def read_file(f):
     tuplas_prohibidas = set()
+
     rows = int(f.readline().split(" ")[0])
     f.seek(0)
     cols = int(f.readline().split(" ")[1])
-    n_f_edges = int(f.readline().split(" ")[0])
+
+    t_forb = int(f.readline())
+
     i = 0
-    while i < n_f_edges:
+    while i < t_forb:
         linea = f.readline().rstrip('\n').split(" ")
         tupla = ((int(linea[0]), int(linea[1])), (int((linea[2])), int(linea[3])))
         tuplas_prohibidas.add(tupla)
@@ -40,6 +43,7 @@ def create_labyring(rows, cols, forbiden:set):
             if i > 0:
                 edges.append(((i, j), (i - 1, j)))
 
+    #Mezclamos de forma aleatoria las aristas
     random.shuffle(edges)
 
     # Creamos una lista vacía "corridors" que será la que contenga las aristas finales del grafo
@@ -49,12 +53,19 @@ def create_labyring(rows, cols, forbiden:set):
     for u, v in edges:
         cu = mfs.find(u)
         cv = mfs.find(v)
+        entra = True
 
         # Aqui comprobamos si esta esa arista, si no hay que meterla
         if cu != cv:
-            #if not forbiden.__contains__((u, v)):
-            corridors.append((u, v))
-            mfs.merge(u, v)
+            for f_ed in forbiden:
+                if f_ed == (u, v) or f_ed == (v, u):
+                    entra = False
+
+            if entra:
+                corridors.append((u, v))
+                mfs.merge(u, v)
+
+
 
     # Devolvemos el grafo resultante
     return UndirectedGraph(E=corridors)
@@ -69,10 +80,19 @@ if __name__ == '__main__':
     cols = info[1]
     tuplas_prohibidas = info[2]
 
+    random.seed(50)
+
+
     graph = create_labyring(rows, cols, tuplas_prohibidas)
+
+
+
 
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
     lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+
+
+
 
     # Obligatorio: Muestra el laberinto
     lv.run()
