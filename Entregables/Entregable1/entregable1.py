@@ -1,15 +1,116 @@
 
 from typing import *
+from easycanvas import EasyCanvas
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 import random
 import os
 
 
-from Entregables.Entregable1.labyrinthviewer import LabyrinthViewer
+#from Entregables.Entregable1.labyrinthviewer import LabyrinthViewer
 
 Vertex = Tuple[int, int]
 Edge = Tuple[Vertex, Vertex]
+
+#--------------------------------------------------------------------------------------------------------------------------#
+
+
+class LabyrinthViewer(EasyCanvas):
+    def __init__(self, lab: UndirectedGraph, canvas_width: int = 400, canvas_height: int = 400, margin: int = 10):
+        EasyCanvas.__init__(self)
+
+        # check 'lab' type
+        if not isinstance(lab, UndirectedGraph) or \
+                any([type(p) != type((1, 1)) or len(p) != 2 or type(p[0]) != type(1) or type(p[1]) != type(1) for p in
+                     lab.V]):
+            raise TypeError("The labyrinth must be an UnirectedGraph of two integer tuples")
+
+        self.lab = lab
+        self.paths = []
+        self.marked_cells = []
+        self.margin = margin
+        self.max_col = max(p[1] for p in self.lab.V)
+        self.max_row = max(p[0] for p in self.lab.V)
+        self.canvas_width = canvas_width
+        self.canvas_height = canvas_height
+        self.cell_size = min(float((canvas_width - margin) / (self.max_col + 1)),
+                             float((canvas_height - margin) / (self.max_row + 1)))
+        self.mw = self.canvas_width - self.cell_size * (self.max_col + 1)
+        self.mh = self.canvas_height - self.cell_size * (self.max_row + 1)
+        self.ip = self.op = None
+
+    def set_input_point(self, pos: Vertex):
+        self.ip = pos
+
+    def set_output_point(self, pos: Vertex):
+        self.op = pos
+
+    def add_marked_cell(self, cell, color='red', ):
+        self.marked_cells.append((cell, color))
+
+    def add_path(self, path: List[Vertex], color: str = 'red', offset: int = 0):
+        self.paths.append((path, color, offset))
+
+    def _draw_path(self, path: List[Vertex], color: str, offset: int):
+        u = path[0]
+        mw2 = self.mw / 2 + self.cell_size / 2 + offset
+        mh2 = self.mh / 2 + self.cell_size / 2 + offset
+        for v in path[1:]:
+            self.create_line(mw2 + u[1] * self.cell_size, mh2 + u[0] * self.cell_size, mw2 + v[1] * self.cell_size,
+                             mh2 + v[0] * self.cell_size, color, width=3)
+            u = v
+
+    def main(self):
+        mw = self.mw
+        mh = self.mh
+
+        self.easycanvas_configure(title='Labyrinth',
+                                  background='white',
+                                  size=(self.canvas_width, self.canvas_height),
+                                  coordinates=(0, self.canvas_height, self.canvas_width, 0))
+
+        # Draw borders
+        self.create_rectangle(mw / 2, mh / 2, self.canvas_width - mw / 2, self.canvas_height - mh / 2)
+
+        # Draw I and O on input and output cells
+        if self.ip is not None:
+            self.create_text(mw / 2 + (self.ip[1] + 0.5) * self.cell_size, mh / 2 + (self.ip[0] + 0.5) * self.cell_size,
+                             "I", self.cell_size / 1.5, "CENTER", "black")
+        if self.op is not None:
+            self.create_text(mw / 2 + (self.op[1] + 0.5) * self.cell_size, mh / 2 + (self.op[0] + 0.5) * self.cell_size,
+                             "O", self.cell_size / 1.5, "CENTER", "black")
+
+        # Draw marked cells
+        for cell, color in self.marked_cells:
+            cx = mw / 2 + cell[1] * self.cell_size + self.cell_size / 2
+            cy = mh / 2 + cell[0] * self.cell_size + self.cell_size / 2
+            self.create_filled_circle(cx, cy, self.cell_size / 2.5 - 1, color, color)
+            self.create_filled_rectangle(cx - self.cell_size / 2 + 1, cy - self.cell_size / 2 + 1,
+                                         cx + self.cell_size / 2, cy + self.cell_size / 2, color, color)
+        # Draw internal walls
+        for r in range(self.max_row + 1):
+            for c in range(self.max_col + 1):
+                u = r, c
+                x = c * self.cell_size
+                y = r * self.cell_size
+
+                if u not in self.lab.V or (r + 1, c) not in self.lab.succs(u):
+                    self.create_line(mw / 2 + x, mh / 2 + y + self.cell_size, mw / 2 + x + self.cell_size,
+                                     mh / 2 + y + self.cell_size)
+
+                if u not in self.lab.V or (r, c + 1) not in self.lab.succs(u):
+                    self.create_line(mw / 2 + x + self.cell_size, mh / 2 + y, mw / 2 + x + self.cell_size,
+                                     mh / 2 + y + self.cell_size)
+
+        for path, color, offset in self.paths:
+            self._draw_path(path, color, offset)
+
+        # Wait for a key
+        self.readkey(True)
+
+
+#--------------------------------------------------------------------------------------------------------------------------#
+
 
 def read_file(f):
     tuplas_prohibidas = set()
@@ -79,43 +180,41 @@ def create_labyring(rows, cols, forbiden:set):
 
 
 if __name__ == '__main__':
+    '''
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
-        print("El parametro introducido no es un fichero.")
+        print("El parametro introducido(", name_fich, ") no es un fichero.")
         exit(0)
     else:
+    '''
+    name_fich = input()
+    file = open(name_fich, "r")
+    info = read_file(file)
+    rows = info[0]
+    cols = info[1]
+    tuplas_prohibidas = info[2]
+
+    random.seed(50)
 
 
-        file = open(name_fich, "r")
-        info = read_file(file)
-        rows = info[0]
-        cols = info[1]
-        tuplas_prohibidas = info[2]
+    edge_list = create_labyring(rows, cols, tuplas_prohibidas)
 
-        random.seed(50)
+    graph = UndirectedGraph(E=edge_list)
 
+    # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+    lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
-        edge_list = create_labyring(rows, cols, tuplas_prohibidas)
+    #Imprimimos los datos pedidos por pantalla
+    print(rows, " ", cols)
 
-        graph = UndirectedGraph(E=edge_list)
+    print(edge_list.__sizeof__())
 
-        # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-        lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+    for u, v in edge_list:
+        print(u[0], u[1], v[0], v[1])
 
-        #Imprimimos los datos pedidos por pantalla
-        print(rows, " ", cols)
-
-        print(edge_list.__sizeof__())
-
-        for u, v in edge_list:
-            print(u[0], u[1], v[0], v[1])
-
-
-
-
-        # Obligatorio: Muestra el laberinto
-        lv.run()
+    # Obligatorio: Muestra el laberinto
+    lv.run()
 
 
 
