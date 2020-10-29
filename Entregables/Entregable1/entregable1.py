@@ -1,9 +1,12 @@
+
 from typing import *
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
-from Practicas.Problemas.Practica1Pau.labyrinthviewerPau import LabyrinthViewer
 import random
 import os
+
+
+from Entregables.Entregable1.labyrinthviewer import LabyrinthViewer
 
 Vertex = Tuple[int, int]
 Edge = Tuple[Vertex, Vertex]
@@ -61,7 +64,7 @@ def create_labyring(rows, cols, forbiden:set):
             #for f_ed in forbiden:
                 #if f_ed == (u, v) or f_ed == (v, u):
                     #entra = False
-            if forbiden.__contains__((u,v)) or forbiden.__contains__((v,u)):
+            if forbiden.__contains__((u, v)) or forbiden.__contains__((v, u)):
                 entra = False
 
             if entra:
@@ -70,8 +73,8 @@ def create_labyring(rows, cols, forbiden:set):
 
 
 
-    # Devolvemos el grafo resultante
-    return UndirectedGraph(E=corridors)
+    # Devolvemos la lista de aristas
+    return corridors
 
 
 
@@ -82,6 +85,8 @@ if __name__ == '__main__':
         print("El parametro introducido no es un fichero.")
         exit(0)
     else:
+
+
         file = open(name_fich, "r")
         info = read_file(file)
         rows = info[0]
@@ -90,11 +95,27 @@ if __name__ == '__main__':
 
         random.seed(50)
 
-        graph = create_labyring(rows, cols, tuplas_prohibidas)
+
+        edge_list = create_labyring(rows, cols, tuplas_prohibidas)
+
+        graph = UndirectedGraph(E=edge_list)
 
         # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
         lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
+        #Imprimimos los datos pedidos por pantalla
+        print(rows, " ", cols)
+
+        print(edge_list.__sizeof__())
+
+        for u, v in edge_list:
+            print(u[0], u[1], v[0], v[1])
+
+
+
+
         # Obligatorio: Muestra el laberinto
         lv.run()
+
+
 
