@@ -4,7 +4,7 @@ from easycanvas import EasyCanvas
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 import random
-import os
+
 
 
 #from Entregables.Entregable1.labyrinthviewer import LabyrinthViewer
@@ -12,7 +12,8 @@ import os
 Vertex = Tuple[int, int]
 Edge = Tuple[Vertex, Vertex]
 
-#--------------------------------------------------------------------------------------------------------------------------#
+#---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
+#---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
 
 
 class LabyrinthViewer(EasyCanvas):

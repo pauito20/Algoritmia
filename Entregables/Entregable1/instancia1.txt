@@ -1,1 +1,1 @@
-lab_30_40_ok.ins
+lab_250_250_ok.ins
