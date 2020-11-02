@@ -1,4 +1,4 @@
-import os
+#import os
 from typing import *
 
 from algoritmia.datastructures.queues import Fifo
@@ -214,7 +214,7 @@ if __name__ == '__main__':
         exit(0)
     else:
     '''
-    name_fich = input().split(" ")[0]
+    name_fich = input()
     file = open(name_fich, "r")
     info = read_file(file)
     rows = info[0]
@@ -231,17 +231,18 @@ if __name__ == '__main__':
     if (len(esConexo(graph)) != 1):
         print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
         exit(-1)
+
+    #Imprimimos los datos pedidos por pantalla
+    print(rows, " ", cols)
+
+    print(edge_list.__sizeof__())
+
+    for u, v in edge_list:
+        print(u[0], u[1], v[0], v[1])
+
     '''
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
         lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
-
-    #Imprimimos los datos pedidos por pantalla
-        print(rows, " ", cols)
-
-        print(edge_list.__sizeof__())
-
-        for u, v in edge_list:
-            print(u[0], u[1], v[0], v[1])
 
     # Obligatorio: Muestra el laberinto
         lv.run()
