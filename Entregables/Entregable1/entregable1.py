@@ -1,10 +1,11 @@
-
+import os
 from typing import *
-##from easycanvas import EasyCanvas
+
+from algoritmia.datastructures.queues import Fifo
+from easycanvas import EasyCanvas
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 import random
-
 
 
 #from Entregables.Entregable1.labyrinthviewer import LabyrinthViewer
@@ -15,7 +16,7 @@ Edge = Tuple[Vertex, Vertex]
 #---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
 #---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
 
-'''
+
 class LabyrinthViewer(EasyCanvas):
     def __init__(self, lab: UndirectedGraph, canvas_width: int = 400, canvas_height: int = 400, margin: int = 10):
         EasyCanvas.__init__(self)
@@ -109,8 +110,33 @@ class LabyrinthViewer(EasyCanvas):
         # Wait for a key
         self.readkey(True)
 
-'''
 #--------------------------------------------------------------------------------------------------------------------------#
+
+def recorredor_aristas_anchura(grafo: UndirectedGraph, v_inicial) -> List[Vertex]:
+    vertices = []
+    queue = Fifo()
+    seen = set()
+    queue.push(v_inicial)
+    seen.add(v_inicial)
+    while len(queue) > 0:
+        v = queue.pop()
+        vertices.append(v)
+        for suc in grafo.succs(v):
+            if suc not in seen:
+                seen.add(suc)
+                queue.push(suc)
+    return vertices
+
+
+def esConexo(grafo: UndirectedGraph):
+    vertices_no_visitados = set(grafo.V)
+    resultado = []
+    while len(vertices_no_visitados) > 0:
+        u = vertices_no_visitados.pop()
+        vertices_visitados = recorredor_aristas_anchura(grafo,u)
+        vertices_no_visitados -= set(vertices_visitados)
+        resultado.append(vertices_visitados)
+    return resultado
 
 
 def read_file(f):
@@ -173,49 +199,51 @@ def create_labyring(rows, cols, forbiden:set):
                 corridors.append((u, v))
                 mfs.merge(u, v)
 
-
-
     # Devolvemos la lista de aristas
     return corridors
 
 
 
 if __name__ == '__main__':
-    '''
+
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
         print("El parametro introducido(", name_fich, ") no es un fichero.")
         exit(0)
     else:
-    '''
-    name_fich = input()
-    file = open(name_fich, "r")
-    info = read_file(file)
-    rows = info[0]
-    cols = info[1]
-    tuplas_prohibidas = info[2]
 
-    random.seed(50)
+        #name_fich = input()
+        file = open(name_fich, "r")
+        info = read_file(file)
+        rows = info[0]
+        cols = info[1]
+        tuplas_prohibidas = info[2]
+
+        random.seed(50)
 
 
-    edge_list = create_labyring(rows, cols, tuplas_prohibidas)
+        edge_list = create_labyring(rows, cols, tuplas_prohibidas)
 
-    graph = UndirectedGraph(E=edge_list)
+        graph = UndirectedGraph(E=edge_list)
+
+        if (len(esConexo(graph)) != 1):
+            print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
+            exit(-1)
 
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-    #lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+        lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
     #Imprimimos los datos pedidos por pantalla
-    print(rows, " ", cols)
+        print(rows, " ", cols)
 
-    print(edge_list.__sizeof__())
+        print(edge_list.__sizeof__())
 
-    for u, v in edge_list:
-        print(u[0], u[1], v[0], v[1])
+        for u, v in edge_list:
+            print(u[0], u[1], v[0], v[1])
 
     # Obligatorio: Muestra el laberinto
-    #lv.run()
+        lv.run()
 
 
 
