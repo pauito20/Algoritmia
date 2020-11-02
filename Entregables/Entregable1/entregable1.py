@@ -1,6 +1,6 @@
 
 from typing import *
-from easycanvas import EasyCanvas
+##from easycanvas import EasyCanvas
 from algoritmia.datastructures.mergefindsets import MergeFindSet
 from algoritmia.datastructures.digraphs import UndirectedGraph
 import random
@@ -15,7 +15,7 @@ Edge = Tuple[Vertex, Vertex]
 #---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
 #---------------------------------------LABYRINTVIEWER-----------------------------------------------------------------------------------#
 
-
+'''
 class LabyrinthViewer(EasyCanvas):
     def __init__(self, lab: UndirectedGraph, canvas_width: int = 400, canvas_height: int = 400, margin: int = 10):
         EasyCanvas.__init__(self)
@@ -109,7 +109,7 @@ class LabyrinthViewer(EasyCanvas):
         # Wait for a key
         self.readkey(True)
 
-
+'''
 #--------------------------------------------------------------------------------------------------------------------------#
 
 
