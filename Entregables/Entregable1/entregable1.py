@@ -204,7 +204,7 @@ if __name__ == '__main__':
     graph = UndirectedGraph(E=edge_list)
 
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-    lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+    #lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
     #Imprimimos los datos pedidos por pantalla
     print(rows, " ", cols)
@@ -215,7 +215,7 @@ if __name__ == '__main__':
         print(u[0], u[1], v[0], v[1])
 
     # Obligatorio: Muestra el laberinto
-    lv.run()
+    #lv.run()
 
 
 
