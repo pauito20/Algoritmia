@@ -230,7 +230,7 @@ if __name__ == '__main__':
         if (len(esConexo(graph)) != 1):
             print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
             exit(-1)
-
+'''
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
         lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
@@ -244,6 +244,6 @@ if __name__ == '__main__':
 
     # Obligatorio: Muestra el laberinto
         lv.run()
-
+'''
 
 
