@@ -1,1 +1,1 @@
-lab_250_250_ok.ins
+EI1022/Entregables/Entregable1/lab_250_250_ok.ins
