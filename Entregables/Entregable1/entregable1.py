@@ -206,30 +206,31 @@ def create_labyring(rows, cols, forbiden:set):
 
 if __name__ == '__main__':
 
+    '''
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
         print("El parametro introducido(", name_fich, ") no es un fichero.")
         exit(0)
     else:
+    '''
+    name_fich = input()
+    file = open(name_fich, "r")
+    info = read_file(file)
+    rows = info[0]
+    cols = info[1]
+    tuplas_prohibidas = info[2]
 
-        #name_fich = input()
-        file = open(name_fich, "r")
-        info = read_file(file)
-        rows = info[0]
-        cols = info[1]
-        tuplas_prohibidas = info[2]
-
-        random.seed(50)
+    random.seed(50)
 
 
-        edge_list = create_labyring(rows, cols, tuplas_prohibidas)
+    edge_list = create_labyring(rows, cols, tuplas_prohibidas)
 
-        graph = UndirectedGraph(E=edge_list)
+    graph = UndirectedGraph(E=edge_list)
 
-        if (len(esConexo(graph)) != 1):
-            print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
-            exit(-1)
+    if (len(esConexo(graph)) != 1):
+        print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
+        exit(-1)
 '''
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
         lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
