@@ -234,7 +234,7 @@ if __name__ == '__main__':
 
     #Imprimimos los datos pedidos por pantalla
     print(rows, " ", cols)
-    print(edge_list.__sizeof__())
+    print(len(edge_list))
 
     for u, v in edge_list:
         print(u[0], u[1], v[0], v[1])
