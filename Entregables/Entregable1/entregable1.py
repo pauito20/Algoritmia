@@ -243,8 +243,6 @@ if __name__ == '__main__':
     for u, v in edge_list:
         print(u[0], u[1], v[0], v[1])
 
-    print("sys.argv[1] es : " , sys.argv[1])
-
     if (len(sys.argv) == 2):
         if (sys.argv[1] == "-g"):
 
