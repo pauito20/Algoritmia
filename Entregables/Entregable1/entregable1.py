@@ -218,8 +218,9 @@ if __name__ == '__main__':
 
     #name_fich = input()
 
-    name_fich = str(sys.stdin)
-    file = open(name_fich, "r")
+    #name_fich = str(sys.stdin)
+    #file = open(name_fich, "r")
+    file = sys.stdin.read()
     info = read_file(file)
     rows = info[0]
     cols = info[1]
