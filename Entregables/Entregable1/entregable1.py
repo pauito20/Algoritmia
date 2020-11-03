@@ -214,7 +214,9 @@ if __name__ == '__main__':
         exit(0)
     else:
     '''
-    name_fich = input()
+    datos = input().split(" ")
+
+    name_fich = datos[0]
     file = open(name_fich, "r")
     info = read_file(file)
     rows = info[0]
