@@ -227,7 +227,6 @@ if __name__ == '__main__':
 
     random.seed(50)
 
-
     edge_list = create_labyring(rows, cols, tuplas_prohibidas)
 
     graph = UndirectedGraph(E=edge_list)
@@ -247,10 +246,10 @@ if __name__ == '__main__':
         if (sys.argv[1] == "-g"):
 
             # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-            #lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+            lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
             # Obligatorio: Muestra el laberinto
-            #lv.run()
+            lv.run()
 
-            print("Laberinto pintado con exito")
+            #print("Laberinto pintado con exito")
 
