@@ -214,9 +214,8 @@ if __name__ == '__main__':
         exit(0)
     else:
     '''
-    datos = input().split(" ")
 
-    name_fich = datos[0]
+    name_fich = input()
     file = open(name_fich, "r")
     info = read_file(file)
     rows = info[0]
@@ -241,7 +240,6 @@ if __name__ == '__main__':
     for u, v in edge_list:
         print(u[0], u[1], v[0], v[1])
 
-    print(datos[1])
 '''
     # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
         lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
@@ -249,5 +247,4 @@ if __name__ == '__main__':
     # Obligatorio: Muestra el laberinto
         lv.run()
 
-        print("Laberinto por pantalla")
 '''
