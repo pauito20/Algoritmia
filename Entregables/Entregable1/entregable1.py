@@ -245,12 +245,13 @@ if __name__ == '__main__':
 
     print("sys.argv[1] es : " , sys.argv[1])
 
-    if (sys.argv[1] == "-g"):
+    if (len(sys.argv) == 2):
+        if (sys.argv[1] == "-g"):
 
-        # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+            # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
             lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
-        # Obligatorio: Muestra el laberinto
+            # Obligatorio: Muestra el laberinto
             lv.run()
 
             print("Laberinto pintado con exito")
