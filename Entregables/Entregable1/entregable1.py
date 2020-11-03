@@ -1,4 +1,5 @@
 #import os
+import sys
 from typing import *
 
 from algoritmia.datastructures.queues import Fifo
@@ -215,7 +216,9 @@ if __name__ == '__main__':
     else:
     '''
 
-    name_fich = input()
+    #name_fich = input()
+
+    name_fich = str(sys.stdin)
     file = open(name_fich, "r")
     info = read_file(file)
     rows = info[0]
@@ -240,11 +243,14 @@ if __name__ == '__main__':
     for u, v in edge_list:
         print(u[0], u[1], v[0], v[1])
 
-'''
-    # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
-        lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+    print("sys.argv[1] es : " , sys.argv[1])
 
-    # Obligatorio: Muestra el laberinto
-        lv.run()
+    if (sys.argv[1] == "-g"):
 
-'''
+        # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
+            lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
+
+        # Obligatorio: Muestra el laberinto
+            lv.run()
+
+
