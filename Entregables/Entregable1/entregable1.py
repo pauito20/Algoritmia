@@ -253,4 +253,5 @@ if __name__ == '__main__':
         # Obligatorio: Muestra el laberinto
             lv.run()
 
+            print("Laberinto pintado con exito")
 
