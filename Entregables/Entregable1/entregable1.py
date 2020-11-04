@@ -139,7 +139,7 @@ def esConexo(grafo: UndirectedGraph):
         resultado.append(vertices_visitados)
     return resultado
 
-
+'''
 def read_file(f):
     tuplas_prohibidas = set()
 
@@ -156,7 +156,7 @@ def read_file(f):
         tuplas_prohibidas.add(tupla)
         i += 1
     return rows, cols, tuplas_prohibidas
-
+'''
 
 def create_labyring(rows, cols, forbiden:set):
     # Creamos una lista de vértices (celdas del laberinto)
@@ -214,8 +214,7 @@ if __name__ == '__main__':
         print("El parametro introducido(", name_fich, ") no es un fichero.")
         exit(0)
     else:
-    '''
-
+    
     name_fich = input()
     #name_fich = str(sys.stdin)
     file = open(name_fich, "r")
@@ -224,6 +223,26 @@ if __name__ == '__main__':
     rows = info[0]
     cols = info[1]
     tuplas_prohibidas = info[2]
+    
+    '''
+    #Creamos el conjunto de tuplas prohibidas
+    tuplas_prohibidas = set()
+    #Convertimos el fichero en una lista de líneas
+    lineas = sys.stdin.readlines()
+    #Obtenemos los datos de la primera línea
+    primera_linea = lineas[0].split(" ")
+    rows = int(primera_linea[0])
+    cols = int(primera_linea[1])
+    #Obtenemos la segunda línea y sus datos
+    n_tuplas_prohibidas = int(lineas[1])
+    #Recorremos según los datos obtenidos
+    i = 0
+    while i < n_tuplas_prohibidas:
+        linea = lineas[2+i].rstrip('\n').split(" ")
+        tupla = ((int(linea[0]),int(linea[1])),(int(linea[2]),int(linea[3])))
+        tuplas_prohibidas.add(tupla)
+        i+=1
+
 
     random.seed(50)
 
