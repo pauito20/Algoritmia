@@ -1,4 +1,5 @@
 #import os
+import os
 import sys
 from typing import *
 
@@ -129,17 +130,21 @@ def recorredor_aristas_anchura(grafo: UndirectedGraph, v_inicial) -> List[Vertex
     return vertices
 
 
-def esConexo(grafo: UndirectedGraph):
-    vertices_no_visitados = set(grafo.V)
-    resultado = []
-    while len(vertices_no_visitados) > 0:
-        u = vertices_no_visitados.pop()
-        vertices_visitados = recorredor_aristas_anchura(grafo,u)
-        vertices_no_visitados -= set(vertices_visitados)
-        resultado.append(vertices_visitados)
-    return resultado
+def EsConexo(grafo: UndirectedGraph, rows, cols):
+    vertices = [(r, c) for r in range(rows) for c in range(cols)]
+    if (len(set(graph.V)) != len(set(vertices))):
+        return 2
+    else:
+        vertices_no_visitados = set(grafo.V)
+        resultado = []
+        while len(vertices_no_visitados) > 0:
+            u = vertices_no_visitados.pop()
+            vertices_visitados = recorredor_aristas_anchura(grafo,u)
+            vertices_no_visitados -= set(vertices_visitados)
+            resultado.append(vertices_visitados)
+        return len(resultado)
 
-'''
+
 def read_file(f):
     tuplas_prohibidas = set()
 
@@ -156,7 +161,7 @@ def read_file(f):
         tuplas_prohibidas.add(tupla)
         i += 1
     return rows, cols, tuplas_prohibidas
-'''
+
 
 def create_labyring(rows, cols, forbiden:set):
     # Creamos una lista de vértices (celdas del laberinto)
@@ -214,16 +219,15 @@ if __name__ == '__main__':
         print("El parametro introducido(", name_fich, ") no es un fichero.")
         exit(0)
     else:
-    
-    name_fich = input()
-    #name_fich = str(sys.stdin)
-    file = open(name_fich, "r")
-    #file = sys.stdin.read()
-    info = read_file(file)
-    rows = info[0]
-    cols = info[1]
-    tuplas_prohibidas = info[2]
-    
+
+        #name_fich = input()
+        #name_fich = str(sys.stdin)
+        file = open(name_fich, "r")
+        #file = sys.stdin.read()
+        info = read_file(file)
+        rows = info[0]
+        cols = info[1]
+        tuplas_prohibidas = info[2]
     '''
     #Creamos el conjunto de tuplas prohibidas
     tuplas_prohibidas = set()
@@ -242,7 +246,7 @@ if __name__ == '__main__':
         tupla = ((int(linea[0]),int(linea[1])),(int(linea[2]),int(linea[3])))
         tuplas_prohibidas.add(tupla)
         i+=1
-
+    
 
     random.seed(50)
 
@@ -250,7 +254,8 @@ if __name__ == '__main__':
 
     graph = UndirectedGraph(E=edge_list)
 
-    if (len(esConexo(graph)) != 1):
+
+    if (EsConexo(graph, rows, cols) != 1):
         print("NO ES POSIBLE CONSTRUIR EL LABERINTO")
         exit(-1)
 
@@ -258,12 +263,12 @@ if __name__ == '__main__':
     print(rows, " ", cols)
     print(len(edge_list))
 
+
     for u, v in edge_list:
         print(u[0], u[1], v[0], v[1])
 
     if (len(sys.argv) == 2):
         if (sys.argv[1] == "-g"):
-
             # Obligatorio: Crea un LabyrinthViewer pasándole el grafo del laberinto
             lv = LabyrinthViewer(graph, canvas_width=800, canvas_height=600, margin=10)
 
