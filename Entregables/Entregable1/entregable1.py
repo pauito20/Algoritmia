@@ -195,9 +195,6 @@ def create_labyring(rows, cols, forbiden:set):
 
         # Aqui comprobamos si esta esa arista, si no hay que meterla
         if cu != cv:
-            #for f_ed in forbiden:
-                #if f_ed == (u, v) or f_ed == (v, u):
-                    #entra = False
             if forbiden.__contains__((u, v)) or forbiden.__contains__((v, u)):
                 entra = False
 
