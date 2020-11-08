@@ -139,7 +139,7 @@ def EsConexo(grafo: UndirectedGraph, rows, cols):
         resultado = []
         while len(vertices_no_visitados) > 0:
             u = vertices_no_visitados.pop()
-            vertices_visitados = recorredor_aristas_anchura(grafo,u)
+            vertices_visitados = recorredor_aristas_anchura(grafo, u)
             vertices_no_visitados -= set(vertices_visitados)
             resultado.append(vertices_visitados)
         return len(resultado)
@@ -243,9 +243,9 @@ if __name__ == '__main__':
     i = 0
     while i < n_tuplas_prohibidas:
         linea = lineas[2+i].rstrip('\n').split(" ")
-        tupla = ((int(linea[0]),int(linea[1])),(int(linea[2]),int(linea[3])))
+        tupla = ((int(linea[0]), int(linea[1])), (int(linea[2]), int(linea[3])))
         tuplas_prohibidas.add(tupla)
-        i+=1
+        i += 1
     
 
     random.seed(50)
