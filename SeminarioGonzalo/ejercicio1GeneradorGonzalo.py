@@ -34,8 +34,8 @@ def take_while(cond, it):
 #Ejercicio5
 
 def squares():
-    i = 0
-    while True:
+    i=0
+    while i < j:
         if math.sqrt(i):
             yield i * i
         i += 1
