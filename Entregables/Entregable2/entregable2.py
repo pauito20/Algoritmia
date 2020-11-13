@@ -5,6 +5,7 @@ from math import sqrt
 
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from algoritmia.datastructures.mergefindsets import MergeFindSet
+from algoritmia.datastructures.queues import Fifo
 
 
 def read_file(f):
@@ -17,29 +18,38 @@ def read_file(f):
     while i < n_graphPoints:
 
         linea = f.readline().rstrip('\n').split(" ")
-        tupla = (round(float(linea[0]), 1), round(float(linea[1]), 1))
+        tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
     return n_graphPoints, list_Points
 
 
 
-def kruskal(graph :UndirectedGraph):
+def kruskal(graph :UndirectedGraph, edgeList ):
     res = []
     indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
 
+    print(indicesPesosOrdenados)
+    vertices = graph.V
+
     mfs = MergeFindSet()
-    for i in graph.V:
+    for i in  vertices:
         mfs.add(i)
 
-    for u, v  in graph.E:
+    w = 0
+    #Comprobacion de que no hay ciclos
+    for i in indicesPesosOrdenados:
+        u, v = edgeList[i]
         cu = mfs.find(u)
         cv = mfs.find(v)
+        print(listaAristasPeso[i])
         if cu != cv:
             mfs.merge(u, v)
+            res.append((u, v))
+            w = w + listaAristasPeso[i]
 
 
-    return res
+    return res, w
 
 
 
@@ -50,7 +60,7 @@ def caulculoDistancia( listPoint, i, j ):
     v2x = listPoint[j][0]
     v2y = listPoint[j][1]
 
-    distancia = sqrt( pow( (v1x+v2x) , 2) + pow( (v1y+v2y) , 2) )
+    distancia = sqrt( pow( (abs(v1x-v2x)) , 2) + pow( (abs(v1y-v2y)) , 2) )
 
     return distancia
 
@@ -86,7 +96,7 @@ if __name__ == '__main__':
     i = 0
     while i < n_graphPoints:
         linea = lineas[1 + i].rstrip('\n').split(" ")
-        tupla = (round(float(linea[0]), 1), round(float(linea[1]), 1))
+        tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
 
@@ -117,5 +127,5 @@ if __name__ == '__main__':
 
 
 
-    print(f"Este es Kruskal \n {kruskal(graph)}")
+    print(f"Este es Kruskal \n {kruskal(graph,edges)}")
 
