@@ -1,5 +1,11 @@
 import os
 import sys
+import random
+from math import sqrt
+
+from algoritmia.datastructures.digraphs import UndirectedGraph
+from algoritmia.datastructures.mergefindsets import MergeFindSet
+
 
 def read_file(f):
 
@@ -16,6 +22,39 @@ def read_file(f):
         i += 1
     return n_graphPoints, list_Points
 
+
+
+def kruskal(graph :UndirectedGraph):
+    res = []
+    indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
+
+    mfs = MergeFindSet()
+    for i in graph.V:
+        mfs.add(i)
+
+    for u, v  in graph.E:
+        cu = mfs.find(u)
+        cv = mfs.find(v)
+        if cu != cv:
+            mfs.merge(u, v)
+
+
+    return res
+
+
+
+def caulculoDistancia( listPoint, i, j ):
+
+    v1x = listPoint[i][0]
+    v1y = listPoint[i][1]
+    v2x = listPoint[j][0]
+    v2y = listPoint[j][1]
+
+    distancia = sqrt( pow( (v1x+v2x) , 2) + pow( (v1y+v2y) , 2) )
+
+    return distancia
+
+
 if __name__ == '__main__':
 
 
@@ -28,11 +67,12 @@ if __name__ == '__main__':
     file = open(name_fich, "r")
     info = read_file(file)
     n_graphPoint = info[0]
-    list_Ponits = info[1]
+    list_Points = info[1]
 
 
     print(f"El num de puntos es:{n_graphPoint}")
-    print(f"Los puntos son: \n {list_Ponits}")
+    print(f"Los puntos son: \n {list_Points}")
+
 
     '''
 
@@ -51,3 +91,31 @@ if __name__ == '__main__':
         i += 1
 
  '''
+
+    listaIndices = [i for i in range(len(list_Points))]
+
+    edges = []
+
+    listaAristasPeso = []
+
+    for i in listaIndices:
+        for j in listaIndices:
+            if i != j:
+                if not edges.__contains__( (i,j) ) or not edges.__contains__( (j,i) ):
+                    edges.append( (i,j) )
+                    peso = caulculoDistancia(list_Points,i,j)
+                    if not listaAristasPeso.__contains__(peso):
+                        listaAristasPeso.append(peso)
+
+    graph = UndirectedGraph(E=edges)
+    print(graph)
+    print(len(graph.E))
+    print(len(listaAristasPeso))
+    print(listaAristasPeso)
+
+
+
+
+
+    print(f"Este es Kruskal \n {kruskal(graph)}")
+
