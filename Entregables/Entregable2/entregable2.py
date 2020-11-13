@@ -25,21 +25,31 @@ def read_file(f):
 
 
 
-def kruskal(graph :UndirectedGraph, edgeList ):
+def kruskal(graph :UndirectedGraph):
     res = []
     indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
-
-    print(indicesPesosOrdenados)
+    edgeList = graph.E
     vertices = graph.V
 
+
+    print("\nDatos para Kruskal:")
+    print("Lista aristas: ", edgeList)
+    print("Lista indices peso ordenados: ", indicesPesosOrdenados)
+    print("Lista vertices: ", vertices)
+
+    listaAristas = []
+    for i in edgeList:
+        listaAristas.append(i)
+    u,v = listaAristas[0]
+
     mfs = MergeFindSet()
-    for i in  vertices:
+    for i in vertices:
         mfs.add(i)
 
     w = 0
     #Comprobacion de que no hay ciclos
     for i in indicesPesosOrdenados:
-        u, v = edgeList[i]
+        u, v = listaAristas[i]
         cu = mfs.find(u)
         cv = mfs.find(v)
         print(listaAristasPeso[i])
@@ -47,7 +57,7 @@ def kruskal(graph :UndirectedGraph, edgeList ):
             mfs.merge(u, v)
             res.append((u, v))
             w = w + listaAristasPeso[i]
-
+    print("Fin kruskal")
 
     return res, w
 
@@ -127,5 +137,5 @@ if __name__ == '__main__':
 
 
 
-    print(f"Este es Kruskal \n {kruskal(graph,edges)}")
+    print(f"Este es el resultado de Kruskal \n {kruskal(graph)}")
 
