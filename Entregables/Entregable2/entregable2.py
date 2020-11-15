@@ -62,6 +62,58 @@ def kruskal(graph :UndirectedGraph):
     return res, w
 
 
+def krucalModificado ( graph : UndirectedGraph ):
+
+    verticesVisitados = []
+    edgeList = graph.E
+    vertices = graph.V
+
+
+    listaAristas = []
+    for i in edgeList:
+        listaAristas.append(i)
+
+    listaVertices = []
+    for i in vertices:
+        listaVertices.append(i)
+
+
+
+    mfs = MergeFindSet()
+    for i in vertices:
+        mfs.add(i)
+
+    vInicial = listaVertices[0]
+
+    queue = Fifo()
+    seen = set()
+    queue.push( vInicial )
+    seen.add(vInicial)
+    peso = 0
+
+    while len(queue) > 0 :
+        v = queue.pop()
+        max, ind = 0.0 , None
+        for suc in graph.succs(v):
+            cv = mfs.find(v)
+            csuc = mfs.find(suc)
+            if csuc != cv:
+                if max < listaAristasPeso[suc]:
+                    max = listaAristasPeso[suc]
+                    ind = suc
+
+        mfs.merge( (ind, v) )
+        verticesVisitados.append(v)
+        queue.push(ind)
+
+    return verticesVisitados
+
+
+
+
+
+
+
 
 def caulculoDistancia( listPoint, i, j ):
 
@@ -129,13 +181,7 @@ if __name__ == '__main__':
 
     graph = UndirectedGraph(E=edges)
     print(graph)
-    print(len(graph.E))
-    print(len(listaAristasPeso))
     print(listaAristasPeso)
-
-
-
-
-
     print(f"Este es el resultado de Kruskal \n {kruskal(graph)}")
+    print(f"Este es el resultado de KruskalModificado \n {krucalModificado(graph)}")
 
