@@ -25,9 +25,9 @@ def read_file(f):
 
 
 
-def kruskal(graph :UndirectedGraph):
+def kruskal(graph :UndirectedGraph, indicesPesosOrdenados ):
+
     res = []
-    indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
     edgeList = graph.E
     vertices = graph.V
 
@@ -36,6 +36,8 @@ def kruskal(graph :UndirectedGraph):
     print("Lista aristas: ", edgeList)
     print("Lista indices peso ordenados: ", indicesPesosOrdenados)
     print("Lista vertices: ", vertices)
+
+
 
     listaAristas = []
     for i in edgeList:
@@ -75,7 +77,6 @@ def kruskalModificado (graph: UndirectedGraph):
     '''
 
     res = []
-    indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
     edgeList = graph.E
     vertices = graph.V
 
@@ -107,14 +108,6 @@ def kruskalModificado (graph: UndirectedGraph):
 
     print("------ Fin kruskal Modificado ------")
     return res, total_weight
-
-
-
-
-
-
-
-
 
 
 def caulculoDistancia( listPoint, i, j ):
@@ -181,9 +174,11 @@ if __name__ == '__main__':
                     if not listaAristasPeso.__contains__(peso):
                         listaAristasPeso.append(peso)
 
+    indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
+
     graph = UndirectedGraph(E=edges)
     print(graph)
     print(listaAristasPeso)
-    print(f"Este es el resultado de Kruskal \n {kruskal(graph)}")
-    print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph)}")
+    print(f"Este es el resultado de Kruskal \n {kruskal(graph, indicesPesosOrdenados)}")
+    #print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph)}")
 
