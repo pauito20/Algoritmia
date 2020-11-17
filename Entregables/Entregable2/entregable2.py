@@ -40,13 +40,14 @@ def kruskal(graph :UndirectedGraph):
     listaAristas = []
     for i in edgeList:
         listaAristas.append(i)
-    u,v = listaAristas[0]
 
     mfs = MergeFindSet()
     for i in vertices:
         mfs.add(i)
 
-    w = 0
+
+
+    total_weight = 0
     #Comprobacion de que no hay ciclos
     for i in indicesPesosOrdenados:
         u, v = listaAristas[i]
@@ -56,57 +57,58 @@ def kruskal(graph :UndirectedGraph):
         if cu != cv:
             mfs.merge(u, v)
             res.append((u, v))
-            w = w + listaAristasPeso[i]
-    print("Fin kruskal")
+            total_weight = total_weight + listaAristasPeso[i]
 
-    return res, w
+    print("------ Fin kruskal ------")
+
+    return res, total_weight
 
 
-def krucalModificado ( graph : UndirectedGraph ):
+def kruskalModificado (graph: UndirectedGraph):
+    '''
+    1. Empezando des del vertice inicial, buscamos la lista de aristas que menos pese
+       en este caso v_inicial = 0
 
-    verticesVisitados = []
+    2. Recorremos la siguiente arista de menor peso
+
+    3. Formamos así el camino más corto des de un índice dado
+    '''
+
+    res = []
+    indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
     edgeList = graph.E
     vertices = graph.V
 
+    print("\nDatos para Kruskal Modificado:")
+    print("Lista aristas: ", edgeList)
+    print("Lista indices peso ordenados: ", indicesPesosOrdenados)
+    print("Lista vertices: ", vertices)
 
     listaAristas = []
     for i in edgeList:
         listaAristas.append(i)
 
-    listaVertices = []
-    for i in vertices:
-        listaVertices.append(i)
-
-
-
     mfs = MergeFindSet()
     for i in vertices:
         mfs.add(i)
 
-    vInicial = listaVertices[0]
+    total_weight = 0
+    # Comprobacion de que no hay ciclos
+    for i in indicesPesosOrdenados:
+        u, v = listaAristas[i]
+        cu = mfs.find(u)
+        cv = mfs.find(v)
+        print(listaAristasPeso[i])
+        if cu != cv:
+            mfs.merge(u, v)
+            res.append((u, v))
+            total_weight = total_weight + listaAristasPeso[i]
 
-    queue = Fifo()
-    seen = set()
-    queue.push( vInicial )
-    seen.add(vInicial)
-    peso = 0
 
-    while len(queue) > 0 :
-        v = queue.pop()
-        max, ind = 0.0 , None
-        for suc in graph.succs(v):
-            cv = mfs.find(v)
-            csuc = mfs.find(suc)
-            if csuc != cv:
-                if max < listaAristasPeso[suc]:
-                    max = listaAristasPeso[suc]
-                    ind = suc
+    print("------ Fin kruskal Modificado ------")
+    return res, total_weight
 
-        mfs.merge( (ind, v) )
-        verticesVisitados.append(v)
-        queue.push(ind)
 
-    return verticesVisitados
 
 
 
@@ -173,9 +175,9 @@ if __name__ == '__main__':
     for i in listaIndices:
         for j in listaIndices:
             if i != j:
-                if not edges.__contains__( (i,j) ) or not edges.__contains__( (j,i) ):
-                    edges.append( (i,j) )
-                    peso = caulculoDistancia(list_Points,i,j)
+                if not edges.__contains__((i, j)) or not edges.__contains__((j, i)):
+                    edges.append((i, j))
+                    peso = caulculoDistancia(list_Points, i, j)
                     if not listaAristasPeso.__contains__(peso):
                         listaAristasPeso.append(peso)
 
@@ -183,5 +185,5 @@ if __name__ == '__main__':
     print(graph)
     print(listaAristasPeso)
     print(f"Este es el resultado de Kruskal \n {kruskal(graph)}")
-    print(f"Este es el resultado de KruskalModificado \n {krucalModificado(graph)}")
+    print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph)}")
 
