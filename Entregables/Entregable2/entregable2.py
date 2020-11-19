@@ -57,7 +57,7 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados):
     return res, total_weight
 
 
-def kruskalModificado(graph: UndirectedGraph):
+def kruskalModificado(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     '''
     1. Empezando des del vertice inicial, buscamos la lista de aristas que menos pese
        en este caso v_inicial = 0
@@ -70,6 +70,7 @@ def kruskalModificado(graph: UndirectedGraph):
     res = []
     edgeList = graph.E
     vertices = graph.V
+    apariciones = [0] * len(vertices)
 
     print("\nDatos para Kruskal Modificado:")
     print("Lista aristas: ", edgeList)
@@ -85,16 +86,31 @@ def kruskalModificado(graph: UndirectedGraph):
         mfs.add(i)
 
     total_weight = 0
-    # Comprobacion de que no hay ciclos
+
+    # Comprobacion de que no hay ciclos y que solo aparezcan una vez (habrá que conectarlos)
     for i in indicesPesosOrdenados:
         u, v = listaAristas[i]
         cu = mfs.find(u)
         cv = mfs.find(v)
         print(listaAristasPeso[i])
-        if cu != cv:
+        if cu != cv and apariciones[v] < 2 and apariciones[u] < 2:
+            apariciones[v] += 1
+            apariciones[u] += 1
             mfs.merge(u, v)
             res.append((u, v))
             total_weight = total_weight + listaAristasPeso[i]
+
+    ult = -1
+    prim = -1
+    for v in vertices:
+        if apariciones[v] < 2:
+            if prim == -1:
+                prim = v
+            else:
+                ult = v
+
+    res.append((prim, ult))
+    total_weight = total_weight + caulculoDistancia(listaPuntos, prim, ult)
 
     print("------ Fin kruskal Modificado ------")
     return res, total_weight
@@ -165,8 +181,9 @@ if __name__ == '__main__':
 
 
 
+
     print("Grafo creado: ", graph)
     print("Lista Pesos Arista: ", listaAristasPeso)
     print("Lista Indices ordenados: ", indicesPesosOrdenados)
     print(f"\n <<<<<<<<<< Este es el resultado de Kruskal >>>>>>>>>>>\n {kruskal(graph, indicesPesosOrdenados)}")
-    # print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph)}")
+    print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph, indicesPesosOrdenados, list_Points)}")
