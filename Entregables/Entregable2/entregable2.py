@@ -186,4 +186,6 @@ if __name__ == '__main__':
     print("Lista Pesos Arista: ", listaAristasPeso)
     print("Lista Indices ordenados: ", indicesPesosOrdenados)
     print(f"\n <<<<<<<<<< Este es el resultado de Kruskal >>>>>>>>>>>\n {kruskal(graph, indicesPesosOrdenados)}")
-    print(f"Este es el resultado de KruskalModificado \n {kruskalModificado(graph, indicesPesosOrdenados, list_Points)}")
+    print(f"\n <<<<<<<<<< Este es el resultado de Kruskal Modificado >>>>>>>>>>>\n {kruskalModificado(graph, indicesPesosOrdenados, list_Points)}")
+
+
