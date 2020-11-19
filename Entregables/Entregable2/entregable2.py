@@ -1,18 +1,14 @@
 import os
 import sys
-import random
 from math import sqrt
-
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from algoritmia.datastructures.mergefindsets import MergeFindSet
-from algoritmia.datastructures.queues import Fifo
+
 
 
 def read_file(f):
     list_Points = []
-
     n_graphPoints = int(f.readline())
-
     i = 0
     while i < n_graphPoints:
         linea = f.readline().rstrip('\n').split(" ")
@@ -27,6 +23,9 @@ def recorrido_profundidad_vertices(g: UndirectedGraph, v_inicial):
         seen.add(v)
         vertices.append(v)
         for suc in g.succs(v):
+            if v == 0:
+                suc = min(g.succs(v))
+
             if suc not in seen:
                 recorrido_desde(suc)
 
@@ -37,24 +36,11 @@ def recorrido_profundidad_vertices(g: UndirectedGraph, v_inicial):
 
 
 def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
-    '''
-    1. Empezando des del vertice inicial, buscamos la lista de aristas que menos pese
-       en este caso v_inicial = 0
-
-    2. Recorremos la siguiente arista de menor peso
-
-    3. Formamos así el camino más corto des de un índice dado
-    '''
-
     res = []
     edgeList = graph.E
     vertices = graph.V
     apariciones = [0] * len(vertices)
 
-    print("\nDatos para Kruskal Modificado:")
-    print("Lista aristas: ", edgeList)
-    print("Lista indices peso ordenados: ", indicesPesosOrdenados)
-    print("Lista vertices: ", vertices)
 
     listaAristas = []
     for i in edgeList:
@@ -71,7 +57,6 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
         u, v = listaAristas[i]
         cu = mfs.find(u)
         cv = mfs.find(v)
-        print(listaAristasPeso[i])
         if cu != cv and apariciones[v] < 2 and apariciones[u] < 2:
             apariciones[v] += 1
             apariciones[u] += 1
@@ -91,7 +76,6 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     res.append((prim, ult))
     total_weight = total_weight + caulculoDistancia(listaPuntos, prim, ult)
 
-    print("------ Fin Kruskal------")
     return res, total_weight
 
 
@@ -108,6 +92,7 @@ def caulculoDistancia(listPoint, i, j):
 
 if __name__ == '__main__':
 
+    sys.setrecursionlimit(1010)
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
@@ -119,11 +104,7 @@ if __name__ == '__main__':
     n_graphPoint = info[0]
     list_Points = info[1]
 
-    print(f"El num de puntos es: {n_graphPoint}")
-    print(f"Los puntos son: \n {list_Points}")
-
     '''
-
     #Creamos una lista donde guardaremos las coordenadas de los puntos
     list_Points = []
     #Convertimos el fichero en una lista de líneas
@@ -137,8 +118,7 @@ if __name__ == '__main__':
         tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
-
- '''
+    '''
 
     listaIndices = [i for i in range(len(list_Points))]
     edges = []
@@ -157,14 +137,12 @@ if __name__ == '__main__':
         listaAristasPeso.append(peso)
 
     indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
-
-    print("Grafo creado: ", graph)
-    print("Lista Pesos Arista: ", listaAristasPeso)
-    print("Lista Indices ordenados: ", indicesPesosOrdenados)
-
     res_kruskal = kruskal(graph, indicesPesosOrdenados, list_Points)
     g = UndirectedGraph(E=res_kruskal[0])
-    print("Recorrido de vertices del ciclo Hamiltoniano por Kruskal: ", recorrido_profundidad_vertices(g, 0))
+
+
+    print(res_kruskal[1])
+    print(recorrido_profundidad_vertices(g, 0))
 
 
 
@@ -172,6 +150,4 @@ if __name__ == '__main__':
 
 
 
-    #print(
-     #   f"\n <<<<<<<<<< Este es el resultado de Kruskal >>>>>>>>>>>\n {kruskal(graph, indicesPesosOrdenados, list_Points)}")
 
