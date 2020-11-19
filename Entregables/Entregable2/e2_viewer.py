@@ -3,6 +3,7 @@ Created on 20/11/2013
 
 @author: david
 '''
+
 from easycanvas import EasyCanvas
 
 def get_bounding_box(points, margin = 0.1): # margin = 0.1 es un 10% de borde

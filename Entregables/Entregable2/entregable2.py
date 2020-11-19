@@ -22,42 +22,21 @@ def read_file(f):
     return n_graphPoints, list_Points
 
 
-def kruskal(graph: UndirectedGraph, indicesPesosOrdenados):
-    res = []
-    edgeList = graph.E
-    vertices = graph.V
+def recorrido_profundidad_vertices(g: UndirectedGraph, v_inicial):
+    def recorrido_desde(v):
+        seen.add(v)
+        vertices.append(v)
+        for suc in g.succs(v):
+            if suc not in seen:
+                recorrido_desde(suc)
 
-    print("\nDatos para Kruskal:")
-    print("Lista aristas: ", edgeList)
-    print("Lista indices peso ordenados: ", indicesPesosOrdenados)
-    print("Lista vertices: ", vertices)
-
-    listaAristas = []
-    for i in edgeList:
-        listaAristas.append(i)
-
-    mfs = MergeFindSet()
-    for i in vertices:
-        mfs.add(i)
-
-    total_weight = 0
-    # Comprobacion de que no hay ciclos
-    for i in indicesPesosOrdenados:
-        u, v = listaAristas[i]
-        cu = mfs.find(u)
-        cv = mfs.find(v)
-        print(listaAristasPeso[i])
-        if cu != cv:
-            mfs.merge(u, v)
-            res.append((u, v))
-            total_weight = total_weight + listaAristasPeso[i]
-
-    print("------ Fin kruskal ------")
-
-    return res, total_weight
+    vertices = []
+    seen = set()
+    recorrido_desde(v_inicial)
+    return vertices
 
 
-def kruskalModificado(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
+def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     '''
     1. Empezando des del vertice inicial, buscamos la lista de aristas que menos pese
        en este caso v_inicial = 0
@@ -112,7 +91,7 @@ def kruskalModificado(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos
     res.append((prim, ult))
     total_weight = total_weight + caulculoDistancia(listaPuntos, prim, ult)
 
-    print("------ Fin kruskal Modificado ------")
+    print("------ Fin Kruskal------")
     return res, total_weight
 
 
@@ -179,13 +158,20 @@ if __name__ == '__main__':
 
     indicesPesosOrdenados = sorted(range(len(listaAristasPeso)), key=lambda i: listaAristasPeso[i])
 
-
-
-
     print("Grafo creado: ", graph)
     print("Lista Pesos Arista: ", listaAristasPeso)
     print("Lista Indices ordenados: ", indicesPesosOrdenados)
-    print(f"\n <<<<<<<<<< Este es el resultado de Kruskal >>>>>>>>>>>\n {kruskal(graph, indicesPesosOrdenados)}")
-    print(f"\n <<<<<<<<<< Este es el resultado de Kruskal Modificado >>>>>>>>>>>\n {kruskalModificado(graph, indicesPesosOrdenados, list_Points)}")
 
+    res_kruskal = kruskal(graph, indicesPesosOrdenados, list_Points)
+    g = UndirectedGraph(E=res_kruskal[0])
+    print("Recorrido de vertices del ciclo Hamiltoniano por Kruskal: ", recorrido_profundidad_vertices(g, 0))
+
+
+
+
+
+
+
+    #print(
+     #   f"\n <<<<<<<<<< Este es el resultado de Kruskal >>>>>>>>>>>\n {kruskal(graph, indicesPesosOrdenados, list_Points)}")
 
