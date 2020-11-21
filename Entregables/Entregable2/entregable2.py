@@ -79,6 +79,59 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     return res, total_weight
 
 
+
+def prim(graph: UndirectedGraph, indicesPesosOrdenados):
+    visitados = [0]
+    res = []
+
+    lista_TodasAristas = []
+    for edge in graph.E:
+        lista_TodasAristas.append(edge)
+
+    lista_Vertices = []
+    for v in graph.V:
+        lista_Vertices.append(v)
+
+    lista_Adyacentes = []
+    listaAristaAD = []
+    lista_indices = []
+    lista_AdyacentesPeso = []
+
+    V = 0
+    weight = 0
+
+    seen = set()
+
+    while len(visitados) < len(lista_Vertices):
+        res.append(V)
+        for ady in graph.succs(V):
+            if ady != V:
+                if ady > V:
+                    arista = (V, ady)
+                    peso = caulculoDistancia(list_Points, V, ady)
+                else:
+                    arista = (ady, V)
+                    peso = caulculoDistancia(list_Points, ady, V)
+
+                if not listaAristaAD.__contains__(arista):
+                    lista_Adyacentes.append(ady)
+                    listaAristaAD.append(arista)
+                    lista_indices.append(int(lista_TodasAristas.index(arista)))
+                    lista_AdyacentesPeso.append(peso)
+                    ordenadas = sorted(range(len(lista_AdyacentesPeso)), key=lambda i: lista_AdyacentesPeso[i])
+
+        for i in ordenadas:
+            if not seen.__contains__(i):
+                seen.add(i)
+                pos = lista_indices.index(i)
+                print(i,pos)
+                V = lista_Adyacentes[pos]
+                visitados.append(V)
+                weight = weight + listaAristasPeso[pos]
+                break
+
+    return visitados, weight
+
 def caulculoDistancia(listPoint, i, j):
     v1x = listPoint[i][0]
     v1y = listPoint[i][1]
@@ -144,6 +197,7 @@ if __name__ == '__main__':
     print(res_kruskal[1])
     print(recorrido_profundidad_vertices(g, 0))
 
+    print(prim(graph,indicesPesosOrdenados))
 
 
 
