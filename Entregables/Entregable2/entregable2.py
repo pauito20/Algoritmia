@@ -79,7 +79,7 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     return res, total_weight
 
 
-
+'''
 def prim(graph: UndirectedGraph, indicesPesosOrdenados):
     visitados = [0]
     res = []
@@ -131,6 +131,66 @@ def prim(graph: UndirectedGraph, indicesPesosOrdenados):
                 break
 
     return visitados, weight
+'''
+
+def prim(graph: UndirectedGraph):
+    visitados = [0]
+    res = []
+
+    aristas = []
+    for edge in graph.E:
+        aristas.append(edge)
+
+    vertices = []
+    for v in graph.V:
+        vertices.append(v)
+
+    mfs = MergeFindSet()
+    for i in vertices:
+        mfs.add(i)
+
+    weight, V = 0, 0
+    seen = set()
+    adyacentesAcomulados = { }
+
+
+    while len(visitados) < len(vertices):
+        res.append(V)
+        visitados.append(V)
+        verticesAdyacentes = []
+        aristasAdyacentes = []
+        pesoAristasAdyacentes = []
+        indices = []
+
+        for ady in graph.succs(V):
+            if ady != V:
+                if ady > V:
+                    arista = (V, ady)
+                    peso = caulculoDistancia(list_Points, V, ady)
+                else:
+                    arista = (ady, V)
+                    peso = caulculoDistancia(list_Points, ady, V)
+
+                if not adyacentesAcomulados.__contains__(arista):
+                    adyacentesAcomulados.setdefault(arista,peso)
+                    verticesAdyacentes.append(ady)
+
+
+        j = 0
+        for i in adyacentesAcomulados.keys():
+            aristasAdyacentes.append(i)
+            indices.append(j)
+            pesoAristasAdyacentes.append(adyacentesAcomulados.get(i))
+            j += 1
+
+        ordenadas = sorted(range(len(pesoAristasAdyacentes)), key=lambda i: pesoAristasAdyacentes[i])
+
+
+
+
+    return res, weight
+
+
 
 def caulculoDistancia(listPoint, i, j):
     v1x = listPoint[i][0]
@@ -197,7 +257,7 @@ if __name__ == '__main__':
     print(res_kruskal[1])
     print(recorrido_profundidad_vertices(g, 0))
 
-    print(prim(graph,indicesPesosOrdenados))
+    print(prim(graph))
 
 
 
