@@ -133,9 +133,9 @@ def prim(graph: UndirectedGraph, indicesPesosOrdenados):
     return visitados, weight
 '''
 
-def prim(graph: UndirectedGraph):
-    visitados = [0]
+def prim(graph: UndirectedGraph, list_Points):
     res = []
+    seen = set()
 
     aristas = []
     for edge in graph.E:
@@ -149,46 +149,55 @@ def prim(graph: UndirectedGraph):
     for i in vertices:
         mfs.add(i)
 
-    weight, V = 0, 0
-    seen = set()
-    adyacentesAcomulados = { }
+    weight, v_padre = 0, 0
+    adyacentesAcumulados ={ }
+    aristasVisitadas = set()
 
-
-    while len(visitados) < len(vertices):
-        res.append(V)
-        visitados.append(V)
-        verticesAdyacentes = []
-        aristasAdyacentes = []
-        pesoAristasAdyacentes = []
-        indices = []
-
-        for ady in graph.succs(V):
-            if ady != V:
-                if ady > V:
-                    arista = (V, ady)
-                    peso = caulculoDistancia(list_Points, V, ady)
+    while len(seen) != len(vertices):
+        seen.add(v_padre)
+        for hijo in graph.succs(v_padre):
+            if hijo != v_padre:
+                if hijo > v_padre:
+                    arista = (v_padre, hijo)
+                    peso = caulculoDistancia(list_Points, v_padre, hijo)
                 else:
-                    arista = (ady, V)
-                    peso = caulculoDistancia(list_Points, ady, V)
+                    arista = (hijo, v_padre)
+                    peso = caulculoDistancia(list_Points, hijo, v_padre)
+                if not aristasVisitadas.__contains__(arista):
+                    adyacentesAcumulados.setdefault(arista,peso)
 
-                if not adyacentesAcomulados.__contains__(arista):
-                    adyacentesAcomulados.setdefault(arista,peso)
-                    verticesAdyacentes.append(ady)
+        hayCiclo = True
+        minimo, edge_min = None, None
 
-
-        j = 0
-        for i in adyacentesAcomulados.keys():
-            aristasAdyacentes.append(i)
-            indices.append(j)
-            pesoAristasAdyacentes.append(adyacentesAcomulados.get(i))
-            j += 1
-
-        ordenadas = sorted(range(len(pesoAristasAdyacentes)), key=lambda i: pesoAristasAdyacentes[i])
-
-
-
+        while hayCiclo and len(adyacentesAcumulados) != 0:
+            minimo = min(adyacentesAcumulados.values())
+            edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
+            u, v = edge_min
+            cu = mfs.find(u)
+            cv = mfs.find(v)
+            if cu != cv:
+                mfs.merge(u, v)
+                hayCiclo = False
+            else:
+                adyacentesAcumulados.pop(edge_min)
+        if len(adyacentesAcumulados) == 0:
+            break
+        adyacentesAcumulados.pop(edge_min)
+        aristasVisitadas.add(edge_min)
+        res.append(edge_min)
+        print(edge_min)
+        weight = weight + minimo
+        u, v_padre = edge_min
 
     return res, weight
+
+
+
+
+
+
+
+
 
 
 
@@ -257,9 +266,10 @@ if __name__ == '__main__':
     print(res_kruskal[1])
     print(recorrido_profundidad_vertices(g, 0))
 
-    print(prim(graph))
-
-
+    res_prim = prim(graph,list_Points)
+    g_prim = UndirectedGraph(E=res_prim[0])
+    print(res_prim[1])
+    print(recorrido_profundidad_vertices(g_prim,0))
 
 
 
