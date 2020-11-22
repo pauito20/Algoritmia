@@ -67,7 +67,7 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     ult = -1
     prim = -1
     for v in vertices:
-        if apariciones[v] < 2:
+         if apariciones[v] < 2:
             if prim == -1:
                 prim = v
             else:
@@ -145,6 +145,8 @@ def prim(graph: UndirectedGraph, list_Points):
     for v in graph.V:
         vertices.append(v)
 
+    apariciones = [0] * len(vertices)
+
     mfs = MergeFindSet()
     for i in vertices:
         mfs.add(i)
@@ -175,31 +177,34 @@ def prim(graph: UndirectedGraph, list_Points):
             u, v = edge_min
             cu = mfs.find(u)
             cv = mfs.find(v)
-            if cu != cv:
+            if cu != cv and apariciones[v] < 2 and apariciones[u] < 2:
+                apariciones[v] += 1
+                apariciones[u] += 1
                 mfs.merge(u, v)
                 hayCiclo = False
             else:
                 adyacentesAcumulados.pop(edge_min)
         if len(adyacentesAcumulados) == 0:
+            ult = -1
+            prim = -1
+            for v in vertices:
+                if apariciones[v] < 2:
+                    if prim == -1:
+                        prim = v
+                    else:
+                        ult = v
+
+            res.append((prim, ult))
+            weight = weight + caulculoDistancia(list_Points, prim, ult)
+
             break
         adyacentesAcumulados.pop(edge_min)
         aristasVisitadas.add(edge_min)
         res.append(edge_min)
-        print(edge_min)
         weight = weight + minimo
         u, v_padre = edge_min
 
     return res, weight
-
-
-
-
-
-
-
-
-
-
 
 def caulculoDistancia(listPoint, i, j):
     v1x = listPoint[i][0]
