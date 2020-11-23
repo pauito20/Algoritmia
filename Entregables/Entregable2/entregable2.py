@@ -3,7 +3,9 @@ import sys
 from math import sqrt
 from algoritmia.datastructures.digraphs import UndirectedGraph
 from algoritmia.datastructures.mergefindsets import MergeFindSet
-
+from algoritmia.datastructures.prioritymaps import MinHeapMap
+from algoritmia.datastructures.priorityqueues import MinHeap
+from algoritmia.datastructures.queues import Fifo
 
 
 def read_file(f):
@@ -98,7 +100,7 @@ def prim(graph: UndirectedGraph, list_Points):
         mfs.add(i)
 
     weight, v_padre = 0, 0
-    adyacentesAcumulados ={ }
+    adyacentesAcumulados = MinHeapMap()
     aristasVisitadas = set()
 
     while len(seen) != len(vertices):
@@ -118,9 +120,13 @@ def prim(graph: UndirectedGraph, list_Points):
         hayCiclo = True
         minimo, edge_min = None, None
 
+
+
         while hayCiclo and len(adyacentesAcumulados) != 0:
-            minimo = min(adyacentesAcumulados.values())
-            edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
+            #minimo = colaPrio.extract_opt()
+            #edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
+            edge_min = adyacentesAcumulados.opt()
+            minimo = adyacentesAcumulados[edge_min]
             u, v = edge_min
             cu = mfs.find(u)
             cv = mfs.find(v)
@@ -130,7 +136,7 @@ def prim(graph: UndirectedGraph, list_Points):
                 mfs.merge(u, v)
                 hayCiclo = False
             else:
-                adyacentesAcumulados.pop(edge_min)
+                adyacentesAcumulados.__delitem__(edge_min)
 
         if len(adyacentesAcumulados) == 0:
             ult = -1
@@ -144,10 +150,10 @@ def prim(graph: UndirectedGraph, list_Points):
 
             res.append((prim, ult))
             weight = weight + caulculoDistancia(list_Points, prim, ult)
-
             break
 
-        adyacentesAcumulados.pop(edge_min)
+
+        adyacentesAcumulados.__delitem__(edge_min)
         aristasVisitadas.add(edge_min)
         res.append(edge_min)
         weight = weight + minimo
@@ -170,7 +176,7 @@ def caulculoDistancia(listPoint, i, j):
 
 
 if __name__ == '__main__':
-    '''
+
     sys.setrecursionlimit(1010)
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
@@ -196,7 +202,7 @@ if __name__ == '__main__':
         tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
-
+    '''
 
     listaIndices = [i for i in range(len(list_Points))]
     edges = []
@@ -221,6 +227,8 @@ if __name__ == '__main__':
 
     print(res_kruskal[1])
     print(recorrido_profundidad_vertices(g, 0))
+
+
 
     res_prim = prim(graph,list_Points)
     g_prim = UndirectedGraph(E=res_prim[0])
