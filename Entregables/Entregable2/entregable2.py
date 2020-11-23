@@ -119,8 +119,6 @@ def prim(graph: UndirectedGraph, list_Points):
         hayCiclo = True
         minimo, edge_min = None, None
 
-
-
         while hayCiclo and len(adyacentesAcumulados) != 0:
             #minimo = colaPrio.extract_opt()
 
@@ -176,6 +174,7 @@ def caulculoDistancia(listPoint, i, j):
 
 
 if __name__ == '__main__':
+
     '''
     sys.setrecursionlimit(1010)
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
@@ -202,6 +201,7 @@ if __name__ == '__main__':
         tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
+
 
 
     listaIndices = [i for i in range(len(list_Points))]
