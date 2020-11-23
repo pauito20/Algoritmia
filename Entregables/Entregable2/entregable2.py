@@ -124,6 +124,7 @@ def prim(graph: UndirectedGraph, list_Points):
 
         while hayCiclo and len(adyacentesAcumulados) != 0:
             #minimo = colaPrio.extract_opt()
+
             #edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
             edge_min = adyacentesAcumulados.opt()
             minimo = adyacentesAcumulados[edge_min]
