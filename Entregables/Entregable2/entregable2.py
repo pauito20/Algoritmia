@@ -103,6 +103,7 @@ def prim(graph: UndirectedGraph, list_Points):
 
     while len(seen) != len(vertices):
         seen.add(v_padre)
+
         for hijo in graph.succs(v_padre):
             if hijo != v_padre:
                 if hijo > v_padre:
@@ -130,6 +131,7 @@ def prim(graph: UndirectedGraph, list_Points):
                 hayCiclo = False
             else:
                 adyacentesAcumulados.pop(edge_min)
+
         if len(adyacentesAcumulados) == 0:
             ult = -1
             prim = -1
@@ -142,13 +144,18 @@ def prim(graph: UndirectedGraph, list_Points):
 
             res.append((prim, ult))
             weight = weight + caulculoDistancia(list_Points, prim, ult)
-
+            
+            weight
             break
+
         adyacentesAcumulados.pop(edge_min)
         aristasVisitadas.add(edge_min)
         res.append(edge_min)
         weight = weight + minimo
         u, v_padre = edge_min
+        if seen.__contains__(v_padre):
+            v_padre, l = edge_min
+
 
     return res, weight
 
@@ -219,6 +226,7 @@ if __name__ == '__main__':
 
     res_prim = prim(graph,list_Points)
     g_prim = UndirectedGraph(E=res_prim[0])
+
     print(res_prim[1])
     print(recorrido_profundidad_vertices(g_prim,0))
 
