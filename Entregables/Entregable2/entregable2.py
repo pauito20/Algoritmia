@@ -144,8 +144,7 @@ def prim(graph: UndirectedGraph, list_Points):
 
             res.append((prim, ult))
             weight = weight + caulculoDistancia(list_Points, prim, ult)
-            
-            weight
+
             break
 
         adyacentesAcumulados.pop(edge_min)
