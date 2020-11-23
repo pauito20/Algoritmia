@@ -110,12 +110,11 @@ def prim(graph: UndirectedGraph, list_Points):
             if hijo != v_padre:
                 if hijo > v_padre:
                     arista = (v_padre, hijo)
-                    peso = caulculoDistancia(list_Points, v_padre, hijo)
                 else:
                     arista = (hijo, v_padre)
-                    peso = caulculoDistancia(list_Points, hijo, v_padre)
-                if not aristasVisitadas.__contains__(arista):
-                    adyacentesAcumulados.setdefault(arista,peso)
+
+                peso = caulculoDistancia(list_Points, hijo, v_padre)
+                adyacentesAcumulados[arista] = peso
 
         hayCiclo = True
         minimo, edge_min = None, None
