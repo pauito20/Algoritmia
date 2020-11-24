@@ -2,7 +2,6 @@ import os
 import sys
 from typing import List, Tuple
 
-import srt as srt
 
 Pos = Tuple[int, int]
 
