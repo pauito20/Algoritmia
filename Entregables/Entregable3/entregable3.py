@@ -1,9 +1,25 @@
 import os
 import sys
-from typing import List, Tuple
-
+from typing import *
+from Teoría.bt_scheme import PartialSolution, Solution, BacktrackingSolver
 
 Pos = Tuple[int, int]
+
+
+class puzlePS(PartialSolution):
+    def __init__(self):
+        pass
+
+    def is_solution(self) -> bool:
+        pass
+
+    def get_solution(self) -> Solution:
+        pass
+
+    def successors(self) -> Iterable["NQueensPS_lista"]:
+        pass
+
+
 
 def read_level(puzle_lines: List[str]) -> Tuple[List[str], Pos, List[Pos], List[Pos]]:
 
@@ -59,8 +75,8 @@ if __name__ == '__main__':
     puzle = sys.stdin.readlines()
 
 
-
     level_map, player_pos, boxes_start, boxes_end = read_level(puzle)
 
-    print(f"El numero maximo de movimientos es: {numMaxMovimientos}")
-    print(read_level(puzle))
+    initial_ps = puzlePS()
+    for sol in BacktrackingSolver.solve(initial_ps):
+        print(sol)
