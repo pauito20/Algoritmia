@@ -43,7 +43,6 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     vertices = graph.V
     apariciones = [0] * len(vertices)
 
-
     listaAristas = []
     for i in edgeList:
         listaAristas.append(i)
@@ -69,7 +68,7 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
     ult = -1
     prim = -1
     for v in vertices:
-         if apariciones[v] < 2:
+        if apariciones[v] < 2:
             if prim == -1:
                 prim = v
             else:
@@ -84,10 +83,6 @@ def kruskal(graph: UndirectedGraph, indicesPesosOrdenados, listaPuntos):
 def prim(graph: UndirectedGraph, list_Points):
     res = []
     seen = set()
-
-    aristas = []
-    for edge in graph.E:
-        aristas.append(edge)
 
     vertices = []
     for v in graph.V:
@@ -120,9 +115,9 @@ def prim(graph: UndirectedGraph, list_Points):
         minimo, edge_min = None, None
 
         while hayCiclo and len(adyacentesAcumulados) != 0:
-            #minimo = colaPrio.extract_opt()
+            # minimo = colaPrio.extract_opt()
 
-            #edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
+            # edge_min = list(adyacentesAcumulados.keys())[list(adyacentesAcumulados.values()).index(minimo)]
             edge_min = adyacentesAcumulados.opt()
             minimo = adyacentesAcumulados[edge_min]
             u, v = edge_min
@@ -137,30 +132,32 @@ def prim(graph: UndirectedGraph, list_Points):
                 adyacentesAcumulados.__delitem__(edge_min)
 
         if len(adyacentesAcumulados) == 0:
-            ult = -1
-            prim = -1
-            for v in vertices:
-                if apariciones[v] < 2:
-                    if prim == -1:
-                        prim = v
-                    else:
-                        ult = v
-
-            res.append((prim, ult))
-            weight = weight + caulculoDistancia(list_Points, prim, ult)
             break
-
 
         adyacentesAcumulados.__delitem__(edge_min)
         aristasVisitadas.add(edge_min)
         res.append(edge_min)
         weight = weight + minimo
         u, v_padre = edge_min
+
         if seen.__contains__(v_padre):
             v_padre, l = edge_min
 
+    ult = -1
+    prim = -1
+
+    for v in vertices:
+        if apariciones[v] < 2:
+            if prim == -1:
+                prim = v
+            else:
+                ult = v
+
+    res.append((prim, ult))
+    weight = weight + caulculoDistancia(list_Points, prim, ult)
 
     return res, weight
+
 
 def caulculoDistancia(listPoint, i, j):
     v1x = listPoint[i][0]
@@ -188,20 +185,21 @@ if __name__ == '__main__':
     n_graphPoint = info[0]
     list_Points = info[1]
     '''
-    #Creamos una lista donde guardaremos las coordenadas de los puntos
+    sys.setrecursionlimit(1010)
+    # Creamos una lista donde guardaremos las coordenadas de los puntos
     list_Points = []
-    #Convertimos el fichero en una lista de líneas
+    # Convertimos el fichero en una lista de líneas
     lineas = sys.stdin.readlines()
-    #Obtenemos el número de puntos del grafo
+    # Obtenemos el número de puntos del grafo
     n_graphPoints = int(lineas[0])
-    #Obtenemos las coordenadas de los puntos
+    # Obtenemos las coordenadas de los puntos
     i = 0
+
     while i < n_graphPoints:
         linea = lineas[1 + i].rstrip('\n').split(" ")
         tupla = (round(float(linea[0]), 2), round(float(linea[1]), 2))
         list_Points.append(tupla)
         i += 1
-
 
 
     listaIndices = [i for i in range(len(list_Points))]
@@ -224,19 +222,11 @@ if __name__ == '__main__':
     res_kruskal = kruskal(graph, indicesPesosOrdenados, list_Points)
     g = UndirectedGraph(E=res_kruskal[0])
 
-
     print(res_kruskal[1])
     print(recorrido_profundidad_vertices(g, 0))
 
-
-
-    res_prim = prim(graph,list_Points)
+    res_prim = prim(graph, list_Points)
     g_prim = UndirectedGraph(E=res_prim[0])
 
     print(res_prim[1])
-    print(recorrido_profundidad_vertices(g_prim,0))
-
-
-
-
-
+    print(recorrido_profundidad_vertices(g_prim, 0))
