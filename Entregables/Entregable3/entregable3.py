@@ -1,34 +1,92 @@
 import os
 import sys
 from typing import *
+
+from typing import Tuple
+
 from Teoría.bt_scheme import PartialSolution, Solution, BacktrackingSolver
 
 Pos = Tuple[int, int]
 
-def puzleSolver(level_map : List[str], player_pos : Tuple[int, ...], boxes_start : Tuple[Tuple[int, ...], ...], boxes_end : Tuple[Tuple[int, ...], ...], maximoMovimientos : int ):
+def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tuple[int, int]], boxes_end : List[Tuple[int, int]], maximoMovimientos : int ):
     class puzlePS(PartialSolution):
-        def __init__(self, decisiones: Tuple[str, ...], pendiente: int, posActualPlayer: Tuple[int, ...], posActualBoxes : Tuple[Tuple[int, ...], ...] ):
+        def __init__(self, decisiones: List[str], posActualPlayer: Tuple[int, ...], posActualBoxes : List[Tuple[int, int]] ):
             self.decisiones = decisiones
-            self.pendiente = pendiente
             self.posActualPlayer = posActualPlayer
             self.posActualBoxes = posActualBoxes
             self.n = len(decisiones)
 
         def is_solution(self) -> bool:
-            return self.pendiente == 0 and self.n <= maximoMovimientos
+            return self.n <= maximoMovimientos and self.posActualBoxes == boxes_end
 
         def get_solution(self) -> Solution:
             return self.decisiones
 
         def successors(self) -> Iterable["NQueensPS_lista"]:
-            if self.n < maximoMovimientos:
-                pass
+            if self.n <= maximoMovimientos:
+                leftPos = Tuple[self.posActualPlayer[0] - 1, self.posActualPlayer[1]]
+                for i in range(len(boxes_start)):
+                    if leftPos == self.posActualBoxes[i]:
+                        leftBox = Tuple[leftPos[0] -1, leftPos[1]]
+                        if matrizMapa[leftBox[0]][leftBox[1]] == " ":
+                            if boxes_end.__contains__(leftBox):
+                                matrizMapa[leftBox[0]][leftBox[1]] = "#"
+                                self.posActualBoxes[i] = leftBox
+                                yield puzlePS(self.decisiones.append("L"), leftPos, self.posActualBoxes)
+                            else:
+                                self.posActualBoxes[i] = leftBox
+                                yield puzlePS(self.decisiones.append("L"), leftPos, self.posActualBoxes)
 
+                rightPos = Tuple[self.posActualPlayer[0] + 1, self.posActualPlayer[1]]
+                for i in range(len(boxes_start)):
+                    if rightPos == self.posActualBoxes[i]:
+                        rightBox = Tuple[leftPos[0] + 1, leftPos[1]]
+                        if matrizMapa[rightBox[0]][rightBox[1]] == " ":
+                            if boxes_end.__contains__(rightBox):
+                                matrizMapa[rightBox[0]][rightBox[1]] = "#"
+                                self.posActualBoxes[i] = rightBox
+                                yield puzlePS(self.decisiones.append("R"), rightPos, self.posActualBoxes)
+                            else:
+                                self.posActualBoxes[i] = rightPos
+                                yield puzlePS(self.decisiones.append("R"), rightPos, self.posActualBoxes)
 
+                upPos = Tuple[self.posActualPlayer[0], self.posActualPlayer[1] + 1]
+                for i in range(len(boxes_start)):
+                    if upPos == self.posActualBoxes[i]:
+                        upBox = Tuple[upPos[0], upPos[1] + 1]
+                        if matrizMapa[upBox[0]][upBox[1]] == " ":
+                            if boxes_end.__contains__(upBox):
+                                matrizMapa[upBox[0]][upBox[1]] = "#"
+                                self.posActualBoxes[i] = upBox
+                                yield puzlePS(self.decisiones.append("U"), upPos, self.posActualBoxes)
+                            else:
+                                self.posActualBoxes[i] = rightPos
+                                yield puzlePS(self.decisiones.append("U"), upPos, self.posActualBoxes)
 
-    initial_ps = puzlePS((), maximoMovimientos, player_pos, boxes_start)
+                downPos = Tuple[self.posActualPlayer[0], self.posActualPlayer[1] - 1]
+                for i in range(len(boxes_start)):
+                    if downPos == self.posActualBoxes[i]:
+                        downBox = Tuple[downPos[0], downBox[1] + 1]
+                        if matrizMapa[downBox[0]][downBox[1]] == " ":
+                            if boxes_end.__contains__(downBox):
+                                matrizMapa[downBox[0]][downBox[1]] = "#"
+                                self.posActualBoxes[i] = downBox
+                                yield puzlePS(self.decisiones.append("D"), downPos, self.posActualBoxes)
+                            else:
+                                self.posActualBoxes[i] = downPos
+                                yield puzlePS(self.decisiones.append("D"), downPos, self.posActualBoxes)
+
+    initial_ps = puzlePS([], player_pos, boxes_start)
     return BacktrackingSolver.solve(initial_ps)
 
+def contruyeMatriz(levelMap):
+    m = []
+    for i in range(len(level_map)):
+        fila = []
+        for c in str(level_map[i]):
+            fila.append(c)
+        m.append(fila)
+    return m
 
 def read_level(puzle_lines: List[str]) -> Tuple[List[str], Pos, List[Pos], List[Pos]]:
 
@@ -60,7 +118,7 @@ def read_level(puzle_lines: List[str]) -> Tuple[List[str], Pos, List[Pos], List[
 if __name__ == '__main__':
 
 
-    numMaxMovimientos = input("Introduce el numero maximo de movimientos: ")
+    numMaxMovimientos = int ( input("Introduce el numero maximo de movimientos: ") )
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
@@ -86,14 +144,14 @@ if __name__ == '__main__':
 
     level_map, player_pos, boxes_start, boxes_end = read_level(puzle)
 
-    res=[]
+    res = []
 
-    print(level_map)
-    print(player_pos)
-    print(boxes_start)
-    print(boxes_end)
+    matrizMapa = contruyeMatriz(level_map)
 
-    for sol in puzleSolver():
+    for sol in puzleSolver( matrizMapa , player_pos , boxes_start , boxes_end, numMaxMovimientos):
         res.append(sol)
 
     print(sol)
+
+
+
