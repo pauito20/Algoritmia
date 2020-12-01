@@ -16,12 +16,13 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
             self.posActualPlayer = posActualPlayer
             self.posActualBoxes = posActualBoxes
             self.n = len(decisiones)
-
+            '''
             print("Decisiones: ", self.decisiones)
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
             print("Numero decisiones: ", self.n)
             print("- - - - - - - - - - - - - - -")
+            '''
 
 
         def is_solution(self) -> bool:
@@ -33,32 +34,13 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
         def successors(self) -> Iterable["puzlePS_lista"]:
 
             if self.n < maximoMovimientos:
-                #IZQUIERDA
-                leftPos = (self.posActualPlayer[0], self.posActualPlayer[1] - 1)
-                if self.posActualBoxes.__contains__(leftPos):
-                    leftBox = (leftPos[0], leftPos[1]-1)
-                    if matrizMapa[int(leftBox[0])][int(leftBox[1])] != "#" and not self.posActualBoxes.__contains__(leftBox):
-                        self.posActualBoxes[0] = leftBox
-                        yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
-                else:
-                    if matrizMapa[int(leftPos[0])][int(leftPos[1])] != "#":
-                        yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
-
-                rightPos = (self.posActualPlayer[0], self.posActualPlayer[1] + 1)
-                if self.posActualBoxes.__contains__(rightPos):
-                    rightBox = (rightPos[0], rightPos[1] + 1)
-                    if matrizMapa[int(rightBox[0])][int(rightBox[1])] != "#" and not self.posActualBoxes.__contains__(rightBox):
-                        self.posActualBoxes[0] = rightBox
-                        yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
-                else:
-                    if matrizMapa[int(rightPos[0])][int(rightPos[1])] != "#":
-                        yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
-
+                #ARRIBA
                 upPos = (self.posActualPlayer[0] - 1, self.posActualPlayer[1])
                 if self.posActualBoxes.__contains__(upPos):
                     upBox = (upPos[0] - 1, upPos[1])
                     if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and not self.posActualBoxes.__contains__(upBox):
-                        self.posActualBoxes[0] = upBox
+                        self.posActualBoxes.remove(upPos)
+                        self.posActualBoxes.append(upBox)
                         yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
                 else:
                     if matrizMapa[int(upPos[0])][int(upPos[1])] != "#":
@@ -67,13 +49,40 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 # ABAJO
                 downPos = (self.posActualPlayer[0] + 1, self.posActualPlayer[1])
                 if self.posActualBoxes.__contains__(downPos):
-                    downBox = (downPos[0]+ 1, downPos[1] )
-                    if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and not self.posActualBoxes.__contains__(downBox):
-                        self.posActualBoxes[0] = downBox
+                    downBox = (downPos[0] + 1, downPos[1])
+                    if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and not self.posActualBoxes.__contains__(
+                            downBox):
+                        self.posActualBoxes.remove(downPos)
+                        self.posActualBoxes.append(downBox)
                         yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
                 else:
                     if matrizMapa[int(downPos[0])][int(downPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
+                #IZQUIERDA
+                leftPos = (self.posActualPlayer[0], self.posActualPlayer[1] - 1)
+                if self.posActualBoxes.__contains__(leftPos):
+                    leftBox = (leftPos[0], leftPos[1]-1)
+                    if matrizMapa[int(leftBox[0])][int(leftBox[1])] != "#" and not self.posActualBoxes.__contains__(leftBox):
+                        self.posActualBoxes.remove(leftPos)
+                        self.posActualBoxes.append(leftBox)
+                        yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
+                else:
+                    if matrizMapa[int(leftPos[0])][int(leftPos[1])] != "#":
+                        yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
+
+                #DERECHA
+                rightPos = (self.posActualPlayer[0], self.posActualPlayer[1] + 1)
+                if self.posActualBoxes.__contains__(rightPos):
+                    rightBox = (rightPos[0], rightPos[1] + 1)
+                    if matrizMapa[int(rightBox[0])][int(rightBox[1])] != "#" and not self.posActualBoxes.__contains__(rightBox):
+                        self.posActualBoxes.remove(rightPos)
+                        self.posActualBoxes.append(rightBox)
+                        yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
+                else:
+                    if matrizMapa[int(rightPos[0])][int(rightPos[1])] != "#":
+                        yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
+
+
 
 
 
