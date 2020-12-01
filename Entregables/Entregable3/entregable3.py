@@ -4,25 +4,25 @@ from typing import *
 
 from typing import Tuple
 
-from Teoría.bt_scheme import PartialSolution, Solution, BacktrackingSolver
+from Teoría.bt_scheme import PartialSolutionWithVisitedControl, Solution, BacktrackingVCSolver, State
 
 Pos = Tuple[int, int]
 
 
 def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tuple[int, int]], boxes_end : List[Tuple[int, int]], maximoMovimientos : int ):
-    class puzlePS(PartialSolution):
+    class puzlePS(PartialSolutionWithVisitedControl):
         def __init__(self, decisiones: Tuple[str,...], posActualPlayer: Tuple[int, ...], posActualBoxes : List[Tuple[int, int]] ):
             self.decisiones = decisiones
             self.posActualPlayer = posActualPlayer
             self.posActualBoxes = posActualBoxes
             self.n = len(decisiones)
-            '''
+
             print("Decisiones: ", self.decisiones)
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
             print("Numero decisiones: ", self.n)
             print("- - - - - - - - - - - - - - -")
-            '''
+
 
         def is_solution(self) -> bool:
             return self.n <= maximoMovimientos and self.posActualBoxes == boxes_end
@@ -32,83 +32,62 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
 
         def successors(self) -> Iterable["puzlePS_lista"]:
 
-            if self.n <= maximoMovimientos:
+            if self.n < maximoMovimientos:
                 #IZQUIERDA
-                leftPos = (self.posActualPlayer[0] , self.posActualPlayer[1]- 1)
-                if leftPos == self.posActualBoxes[0]:
-                    leftBox = (leftPos[0] , leftPos[1]-1)
+                leftPos = (self.posActualPlayer[0], self.posActualPlayer[1] - 1)
+                if self.posActualBoxes.__contains__(leftPos):
+                    leftBox = (leftPos[0], leftPos[1]-1)
                     if matrizMapa[int(leftBox[0])][int(leftBox[1])] != "#" and not self.posActualBoxes.__contains__(leftBox):
                         self.posActualBoxes[0] = leftBox
                         yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
-                elif leftPos == self.posActualBoxes[1]:
-                    leftBox = (leftPos[0], leftPos[1]-1)
-                    if matrizMapa[int(leftBox[0])][int(leftBox[1])] != "#" and not self.posActualBoxes.__contains__(leftBox):
-                        self.posActualBoxes[1] = leftBox
-                        yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
-
                 else:
                     if matrizMapa[int(leftPos[0])][int(leftPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
 
                 rightPos = (self.posActualPlayer[0], self.posActualPlayer[1] + 1)
-                if rightPos == self.posActualBoxes[0]:
+                if self.posActualBoxes.__contains__(rightPos):
                     rightBox = (rightPos[0], rightPos[1] + 1)
                     if matrizMapa[int(rightBox[0])][int(rightBox[1])] != "#" and not self.posActualBoxes.__contains__(rightBox):
                         self.posActualBoxes[0] = rightBox
-                        yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
-                elif rightPos == self.posActualBoxes[1]:
-                    rightBox = (rightPos[0], rightPos[1]+ 1)
-                    if matrizMapa[int(rightBox[0])][int(rightBox[1])]  != "#" and not self.posActualBoxes.__contains__(rightBox):
-                        self.posActualBoxes[1] = rightBox
                         yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
                 else:
                     if matrizMapa[int(rightPos[0])][int(rightPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
 
                 upPos = (self.posActualPlayer[0] - 1, self.posActualPlayer[1])
-                if upPos == self.posActualBoxes[0]:
+                if self.posActualBoxes.__contains__(upPos):
                     upBox = (upPos[0] - 1, upPos[1])
                     if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and not self.posActualBoxes.__contains__(upBox):
                         self.posActualBoxes[0] = upBox
-                        yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
-                elif upPos == self.posActualBoxes[1]:
-                    upBox = (upPos[0] - 1, upPos[1])
-                    if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and not self.posActualBoxes.__contains__(upBox):
-                        self.posActualBoxes[1] = upBox
                         yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
                 else:
                     if matrizMapa[int(upPos[0])][int(upPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
 
                 # ABAJO
-                downPos = (self.posActualPlayer[0]+ 1, self.posActualPlayer[1] )
-                if upPos == self.posActualBoxes[0]:
+                downPos = (self.posActualPlayer[0] + 1, self.posActualPlayer[1])
+                if self.posActualBoxes.__contains__(downPos):
                     downBox = (downPos[0]+ 1, downPos[1] )
                     if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and not self.posActualBoxes.__contains__(downBox):
                         self.posActualBoxes[0] = downBox
-                        yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
-                elif downPos == self.posActualBoxes[1]:
-                    downBox = (downPos[0]+ 1, downPos[1] )
-                    if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and not self.posActualBoxes.__contains__(downBox):
-                        self.posActualBoxes[1] = downBox
                         yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
                 else:
                     if matrizMapa[int(downPos[0])][int(downPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
 
 
-        '''
+
         def state(self) -> State:  
-           return(self.decisiones)
+           return(self.posActualPlayer, tuple(self.posActualBoxes))
        
         def f(self) -> Union[int, float]:   #Es la funcion que queremos optimizar
             return self.n
-        '''
+
 
 
 
     initial_ps = puzlePS((), player_pos, boxes_start)
-    return BacktrackingSolver.solve(initial_ps)
+    return BacktrackingVCSolver.solve(initial_ps)
 
 def contruyeMatriz(levelMap):
     m = []
