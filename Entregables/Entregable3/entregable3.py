@@ -28,10 +28,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 leftPos = Tuple[self.posActualPlayer[0] - 1, self.posActualPlayer[1]]
                 for i in range(len(boxes_start)):
                     if leftPos == self.posActualBoxes[i]:
-                        leftBox = Tuple[leftPos[0] -1, leftPos[1]]
+                        leftBox = Tuple[leftPos[0] - 1, leftPos[1]]
                         if matrizMapa[leftBox[0]][leftBox[1]] == " ":
                             if boxes_end.__contains__(leftBox):
-                                matrizMapa[leftBox[0]][leftBox[1]] = "#"
                                 self.posActualBoxes[i] = leftBox
                                 yield puzlePS(self.decisiones.append("L"), leftPos, self.posActualBoxes)
                             else:
@@ -44,7 +43,6 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                         rightBox = Tuple[leftPos[0] + 1, leftPos[1]]
                         if matrizMapa[rightBox[0]][rightBox[1]] == " ":
                             if boxes_end.__contains__(rightBox):
-                                matrizMapa[rightBox[0]][rightBox[1]] = "#"
                                 self.posActualBoxes[i] = rightBox
                                 yield puzlePS(self.decisiones.append("R"), rightPos, self.posActualBoxes)
                             else:
@@ -57,7 +55,6 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                         upBox = Tuple[upPos[0], upPos[1] + 1]
                         if matrizMapa[upBox[0]][upBox[1]] == " ":
                             if boxes_end.__contains__(upBox):
-                                matrizMapa[upBox[0]][upBox[1]] = "#"
                                 self.posActualBoxes[i] = upBox
                                 yield puzlePS(self.decisiones.append("U"), upPos, self.posActualBoxes)
                             else:
@@ -70,12 +67,19 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                         downBox = Tuple[downPos[0], downBox[1] + 1]
                         if matrizMapa[downBox[0]][downBox[1]] == " ":
                             if boxes_end.__contains__(downBox):
-                                matrizMapa[downBox[0]][downBox[1]] = "#"
                                 self.posActualBoxes[i] = downBox
                                 yield puzlePS(self.decisiones.append("D"), downPos, self.posActualBoxes)
                             else:
                                 self.posActualBoxes[i] = downPos
                                 yield puzlePS(self.decisiones.append("D"), downPos, self.posActualBoxes)
+        '''
+        def state(self) -> State:  
+           pass
+       
+        def f(self) -> Union[int, float]:   #Es la funcion que queremos optimizar
+            pass
+        '''
+
 
     initial_ps = puzlePS([], player_pos, boxes_start)
     return BacktrackingSolver.solve(initial_ps)
