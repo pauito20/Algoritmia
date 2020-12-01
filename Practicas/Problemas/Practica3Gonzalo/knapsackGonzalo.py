@@ -52,3 +52,6 @@ if __name__ == "__main__":
         print(f"Weight = {w} Values ={v}")
         print (sol)
     print("\n<TERMINADO>")
+    tupla1 = (0, 0)
+
+    print((tupla1[0]-1, tupla1[1]))

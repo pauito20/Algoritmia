@@ -40,6 +40,11 @@ class BacktrackingSolver:
             else:
                 for new_ps in ps.successors():
                     yield from bt(new_ps)
+                    '''
+                    yield from bt(new_ps) ==
+                    for v in bt(new_ps): 
+                        yield v
+                    '''
 
         return bt(initial_ps)
 

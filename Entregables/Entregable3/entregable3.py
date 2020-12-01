@@ -4,9 +4,10 @@ from typing import *
 
 from typing import Tuple
 
-from Teoría.bt_scheme import PartialSolution, Solution, BacktrackingSolver
+from Teoría.bt_scheme import PartialSolution, Solution, BacktrackingSolver, State
 
 Pos = Tuple[int, int]
+
 
 def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tuple[int, int]], boxes_end : List[Tuple[int, int]], maximoMovimientos : int ):
     class puzlePS(PartialSolution):
