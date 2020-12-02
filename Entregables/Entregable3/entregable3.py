@@ -27,7 +27,7 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
 
 
         def is_solution(self) -> bool:
-            return self.n <= maximoMovimientos and self.posActualBoxes == boxes_end
+            return self.n <= maximoMovimientos and sonIguales(self.posActualBoxes, boxes_end)
 
         def get_solution(self) -> Solution:
             return self.decisiones
@@ -41,7 +41,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 if rightPos in self.posActualBoxes:
                     rightBox = (rightPos[0], rightPos[1] + 1)
                     if matrizMapa[int(rightBox[0])][int(rightBox[1])] != "#" and rightBox not in self.posActualBoxes and rightBox not in self.goalBox:
-                        posicionesBoxes = self.posActualBoxes    #la copia
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
                         posicionesBoxes.remove(rightPos)
                         posicionesBoxes.append(rightBox)
                         if rightBox in boxes_end:
@@ -56,7 +58,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 if leftPos in self.posActualBoxes:
                     leftBox = (leftPos[0], leftPos[1]-1)
                     if matrizMapa[int(leftBox[0])][int(leftBox[1])] != "#" and leftBox not in self.posActualBoxes and leftBox not in self.goalBox:
-                        posicionesBoxes = self.posActualBoxes
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
                         posicionesBoxes.remove(leftPos)
                         posicionesBoxes.append(leftBox)
                         if leftBox in boxes_end:
@@ -71,7 +75,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 if upPos in self.posActualBoxes:
                     upBox = (upPos[0] - 1, upPos[1])
                     if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and upBox not in self.posActualBoxes and upBox not in self.goalBox:
-                        posicionesBoxes = self.posActualBoxes
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
                         posicionesBoxes.remove(upPos)
                         posicionesBoxes.append(upBox)
                         if upBox in boxes_end:
@@ -86,7 +92,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                 if downPos in self.posActualBoxes:
                     downBox = (downPos[0] + 1, downPos[1])
                     if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and downBox not in self.posActualBoxes and downBox not in self.goalBox:
-                        posicionesBoxes = self.posActualBoxes
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
                         posicionesBoxes.remove(downPos)
                         posicionesBoxes.append(downBox)
                         if downBox in boxes_end:
@@ -106,6 +114,16 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
 
     initial_ps = puzlePS((), player_pos, boxes_start,[])
     return BacktrackingVCSolver.solve(initial_ps)
+
+def sonIguales (tuplas1:List[Tuple[int, int]], tuplas2:List[Tuple[int, int]]):
+    noEsta = True
+    for i in range(len(tuplas1)):
+        for j in range(len(tuplas2)):
+            if tuplas1[i] == tuplas2[j]:
+                noEsta = False
+        if noEsta:
+            return False
+    return True
 
 def contruyeMatriz(levelMap):
     m = []
@@ -176,10 +194,16 @@ if __name__ == '__main__':
 
     matrizMapa = contruyeMatriz(level_map)
 
-
+    haySolucion = False
 
     for sol in puzleSolver( matrizMapa , player_pos , boxes_start , boxes_end, numMaxMovimientos):
-        print(sol)
+        print(f"La solucion es {sol}")
+        haySolucion = True
+        break
+
+    if not haySolucion:
+        print(f"NO HAY SOLUCIÓN CON LOS MOVIMIENTOS PEDIDOS")
+
 
 
 
