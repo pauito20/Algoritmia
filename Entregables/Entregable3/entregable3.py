@@ -4,25 +4,28 @@ from typing import *
 
 from typing import Tuple
 
-from Teoría.bt_scheme import PartialSolutionWithVisitedControl, Solution, BacktrackingVCSolver, State
+from Teoría.bt_scheme import PartialSolutionWithOptimization, Solution, BacktrackingOptSolver, State
 
 Pos = Tuple[int, int]
 
 
 def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tuple[int, int]], boxes_end : List[Tuple[int, int]], maximoMovimientos : int ):
-    class puzlePS(PartialSolutionWithVisitedControl):
+    class puzlePS(PartialSolutionWithOptimization):
         def __init__(self, decisiones: Tuple[str,...], posActualPlayer: Tuple[int, ...], posActualBoxes : List[Tuple[int, int]]):
             self.decisiones = decisiones
             self.posActualPlayer = posActualPlayer
             self.posActualBoxes = posActualBoxes
             self.n = len(decisiones)
+
             '''
             print("Decisiones: ", self.decisiones)
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
+            print("Posición Final de la caja: ", boxes_end)
             print("Numero decisiones: ", self.n)
             print("- - - - - - - - - - - - - - -")
             '''
+
 
 
 
@@ -35,6 +38,35 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
         def successors(self) -> Iterable["puzlePS_lista"]:
 
             if self.n < maximoMovimientos:
+                # ARRIBA
+                upPos = (self.posActualPlayer[0] - 1, self.posActualPlayer[1])
+                if upPos in self.posActualBoxes:
+                    upBox = (upPos[0] - 1, upPos[1])
+                    if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and upBox not in self.posActualBoxes:
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
+                        posicionesBoxes.remove(upPos)
+                        posicionesBoxes.append(upBox)
+                        yield puzlePS(self.decisiones + ("U",), upPos, posicionesBoxes)
+                else:
+                    if matrizMapa[int(upPos[0])][int(upPos[1])] != "#":
+                        yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
+
+                # ABAJO
+                downPos = (self.posActualPlayer[0] + 1, self.posActualPlayer[1])
+                if downPos in self.posActualBoxes:
+                    downBox = (downPos[0] + 1, downPos[1])
+                    if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and downBox not in self.posActualBoxes:
+                        posicionesBoxes = []
+                        for box in self.posActualBoxes:
+                            posicionesBoxes.append(box)
+                        posicionesBoxes.remove(downPos)
+                        posicionesBoxes.append(downBox)
+                        yield puzlePS(self.decisiones + ("D",), downPos, posicionesBoxes)
+                else:
+                    if matrizMapa[int(downPos[0])][int(downPos[1])] != "#":
+                        yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
 
                 # DERECHA
                 rightPos = (self.posActualPlayer[0], self.posActualPlayer[1] + 1)
@@ -66,35 +98,7 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                     if matrizMapa[int(leftPos[0])][int(leftPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
 
-                # ARRIBA
-                upPos = (self.posActualPlayer[0] - 1, self.posActualPlayer[1])
-                if upPos in self.posActualBoxes:
-                    upBox = (upPos[0] - 1, upPos[1])
-                    if matrizMapa[int(upBox[0])][int(upBox[1])] != "#" and upBox not in self.posActualBoxes:
-                        posicionesBoxes = []
-                        for box in self.posActualBoxes:
-                            posicionesBoxes.append(box)
-                        posicionesBoxes.remove(upPos)
-                        posicionesBoxes.append(upBox)
-                        yield puzlePS(self.decisiones + ("U",), upPos, posicionesBoxes)
-                else:
-                    if matrizMapa[int(upPos[0])][int(upPos[1])] != "#":
-                        yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
 
-                # ABAJO
-                downPos = (self.posActualPlayer[0] + 1, self.posActualPlayer[1])
-                if downPos in self.posActualBoxes:
-                    downBox = (downPos[0] + 1, downPos[1])
-                    if matrizMapa[int(downBox[0])][int(downBox[1])] != "#" and downBox not in self.posActualBoxes:
-                        posicionesBoxes = []
-                        for box in self.posActualBoxes:
-                            posicionesBoxes.append(box)
-                        posicionesBoxes.remove(downPos)
-                        posicionesBoxes.append(downBox)
-                        yield puzlePS(self.decisiones + ("D",), downPos, posicionesBoxes)
-                else:
-                    if matrizMapa[int(downPos[0])][int(downPos[1])] != "#":
-                        yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
 
         def state(self) -> State:  
            return(self.posActualPlayer, tuple(self.posActualBoxes))
@@ -105,7 +109,7 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
 
 
     initial_ps = puzlePS((), player_pos, boxes_start)
-    return BacktrackingVCSolver.solve(initial_ps)
+    return BacktrackingOptSolver.solve(initial_ps)
 
 def sonIguales (tuplas1:List[Tuple[int, int]], tuplas2:List[Tuple[int, int]]):
     iguales = True
@@ -154,7 +158,7 @@ def read_level(puzle_lines: List[str]) -> Tuple[List[str], Pos, List[Pos], List[
 
 if __name__ == '__main__':
 
-
+    '''
     numMaxMovimientos = int ( input("Introduce el numero maximo de movimientos: ") )
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
@@ -177,7 +181,7 @@ if __name__ == '__main__':
 
     #Convertimos el fichero en una lista de líneas
     puzle = sys.stdin.readlines()
-    '''
+
 
     level_map, player_pos, boxes_start, boxes_end = read_level(puzle)
 
@@ -186,11 +190,16 @@ if __name__ == '__main__':
     matrizMapa = contruyeMatriz(level_map)
 
     haySolucion = False
-
+    solu = None
     for sol in puzleSolver( matrizMapa , player_pos , boxes_start , boxes_end, numMaxMovimientos):
-        print(f"La solucion es {sol}")
+        solu = sol
         haySolucion = True
         break
+    ret = ""
+    if haySolucion:
+        for e in solu:
+            ret+=e
+    print(ret)
 
     if not haySolucion:
         print(f"NO HAY SOLUCIÓN CON LOS MOVIMIENTOS PEDIDOS")
