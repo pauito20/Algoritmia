@@ -4,13 +4,13 @@ from typing import *
 
 from typing import Tuple
 
-from Teoría.bt_scheme import PartialSolutionWithVisitedControl, Solution, BacktrackingVCSolver, State
+from Teoría.bt_scheme import PartialSolutionWithOptimization, Solution, BacktrackingOptSolver, State
 
 Pos = Tuple[int, int]
 
 
 def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tuple[int, int]], boxes_end : List[Tuple[int, int]], maximoMovimientos : int ):
-    class puzlePS(PartialSolutionWithVisitedControl):
+    class puzlePS(PartialSolutionWithOptimization):
         def __init__(self, decisiones: Tuple[str,...], posActualPlayer: Tuple[int, ...], posActualBoxes : List[Tuple[int, int]], goalBox: List[Tuple[int, int]] ):
             self.decisiones = decisiones
             self.posActualPlayer = posActualPlayer
@@ -22,7 +22,9 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
             print("Numero decisiones: ", self.n)
+            print("Goal Box: ", goalBox)
             print("- - - - - - - - - - - - - - -")
+
 
 
 
@@ -105,7 +107,7 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
 
 
     initial_ps = puzlePS((), player_pos, boxes_start,[])
-    return BacktrackingVCSolver.solve(initial_ps)
+    return BacktrackingOptSolver.solve(initial_ps)
 
 def contruyeMatriz(levelMap):
     m = []

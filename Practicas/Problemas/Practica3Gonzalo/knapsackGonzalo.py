@@ -10,6 +10,13 @@ def knapsack_solve(weights, values, capacity):
             self.n = len(usados)    #longitud de las decisiones tomadas
             self.valor = valor      #valor de la mochila
 
+            print(" ------------ ")
+            print("Pendiente: ",self.pendiente)
+            print("Usados: ", self.usados)
+            print("Longitud: ", self.n)
+            print("Valor mochila: ",self.valor)
+            print(" ------------ ")
+
         def is_solution(self) -> bool:      # IMPLEMENTAR
             return self.n == len(values)
 
