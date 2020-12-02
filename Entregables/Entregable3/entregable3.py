@@ -1,5 +1,6 @@
 import os
 import sys
+from filecmp import cmp
 from typing import *
 
 from typing import Tuple
@@ -21,15 +22,19 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
             print("Decisiones: ", self.decisiones)
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
+            print("Posición Final Cajas, ", boxes_end)
             print("Numero decisiones: ", self.n)
             print("Goal Box: ", goalBox)
             print("- - - - - - - - - - - - - - -")
 
 
-
-
         def is_solution(self) -> bool:
-            return self.n <= maximoMovimientos and self.posActualBoxes == boxes_end
+            solucion = True
+            for e in self.posActualBoxes:
+                if e not in boxes_end:
+                    solucion = False
+            return solucion
+
 
         def get_solution(self) -> Solution:
             return self.decisiones
