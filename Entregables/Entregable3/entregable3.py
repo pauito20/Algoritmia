@@ -16,12 +16,13 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
             self.posActualPlayer = posActualPlayer
             self.posActualBoxes = posActualBoxes
             self.n = len(decisiones)
-
+            '''
             print("Decisiones: ", self.decisiones)
             print("Posición Actual: ", self.posActualPlayer)
             print("Posición Actual Caja: ", self.posActualBoxes)
             print("Numero decisiones: ", self.n)
             print("- - - - - - - - - - - - - - -")
+            '''
 
 
 
@@ -107,14 +108,13 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
     return BacktrackingVCSolver.solve(initial_ps)
 
 def sonIguales (tuplas1:List[Tuple[int, int]], tuplas2:List[Tuple[int, int]]):
-    noEsta = True
-    for i in range(len(tuplas1)):
-        for j in range(len(tuplas2)):
-            if tuplas1[i] == tuplas2[j]:
-                noEsta = False
-        if noEsta:
-            return False
-    return True
+    iguales = True
+    for e in tuplas1:
+        if e not in tuplas2:
+            iguales = False
+    return iguales
+
+
 
 def contruyeMatriz(levelMap):
     m = []
