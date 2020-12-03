@@ -48,7 +48,8 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                             posicionesBoxes.append(box)
                         posicionesBoxes.remove(upPos)
                         posicionesBoxes.append(upBox)
-                        yield puzlePS(self.decisiones + ("U",), upPos, posicionesBoxes)
+                        if not (upBox not in boxes_end and matrizMapa[upBox[0] - 1][upBox[1]] == "#" and (matrizMapa[upBox[0]][upBox[1] - 1] == "#" or matrizMapa[upBox[0]][upBox[1] + 1] == "#")):
+                            yield puzlePS(self.decisiones + ("U",), upPos, posicionesBoxes)
                 else:
                     if matrizMapa[int(upPos[0])][int(upPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("U",), upPos, self.posActualBoxes)
@@ -63,7 +64,8 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                             posicionesBoxes.append(box)
                         posicionesBoxes.remove(downPos)
                         posicionesBoxes.append(downBox)
-                        yield puzlePS(self.decisiones + ("D",), downPos, posicionesBoxes)
+                        if not (downBox not in boxes_end and matrizMapa[downBox[0] + 1][downBox[1]] == "#" and (matrizMapa[downBox[0]][downBox[1] - 1] == "#" or matrizMapa[downBox[0]][downBox[1] + 1] == "#")):
+                            yield puzlePS(self.decisiones + ("D",), downPos, posicionesBoxes)
                 else:
                     if matrizMapa[int(downPos[0])][int(downPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("D",), downPos, self.posActualBoxes)
@@ -78,7 +80,8 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                             posicionesBoxes.append(box)
                         posicionesBoxes.remove(rightPos)
                         posicionesBoxes.append(rightBox)
-                        yield puzlePS(self.decisiones + ("R",), rightPos, posicionesBoxes)
+                        if not (rightBox not in boxes_end and matrizMapa[rightBox[0]][rightBox[1]+1] == "#" and (matrizMapa[rightBox[0]+1][rightBox[1]] == "#" or matrizMapa[rightBox[0]-1][rightBox[1]] == "#")):
+                            yield puzlePS(self.decisiones + ("R",), rightPos, posicionesBoxes)
                 else:
                     if matrizMapa[int(rightPos[0])][int(rightPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("R",), rightPos, self.posActualBoxes)
@@ -93,7 +96,8 @@ def puzleSolver(matrizMapa , player_pos : Tuple[int, ...], boxes_start : List[Tu
                             posicionesBoxes.append(box)
                         posicionesBoxes.remove(leftPos)
                         posicionesBoxes.append(leftBox)
-                        yield puzlePS(self.decisiones + ("L",), leftPos, posicionesBoxes)
+                        if not (leftBox not in boxes_end and matrizMapa[leftBox[0]][leftBox[1] - 1] == "#" and (matrizMapa[leftBox[0] - 1][leftBox[1]] == "#" or matrizMapa[leftBox[0] + 1][leftBox[1]] == "#")):
+                            yield puzlePS(self.decisiones + ("L",), leftPos, posicionesBoxes)
                 else:
                     if matrizMapa[int(leftPos[0])][int(leftPos[1])] != "#":
                         yield puzlePS(self.decisiones + ("L",), leftPos, self.posActualBoxes)
@@ -117,8 +121,6 @@ def sonIguales (tuplas1:List[Tuple[int, int]], tuplas2:List[Tuple[int, int]]):
         if e not in tuplas2:
             iguales = False
     return iguales
-
-
 
 def contruyeMatriz(levelMap):
     m = []
@@ -195,11 +197,12 @@ if __name__ == '__main__':
         solu = sol
         haySolucion = True
         break
-    ret = ""
+
+    res = ""
     if haySolucion:
         for e in solu:
-            ret+=e
-    print(ret)
+            res += e
+    print(res)
 
     if not haySolucion:
         print(f"NO HAY SOLUCIÓN CON LOS MOVIMIENTOS PEDIDOS")
