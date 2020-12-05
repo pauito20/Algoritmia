@@ -10,7 +10,7 @@ from typing import *
 
 from algoritmia.datastructures.priorityqueues import MaxHeap, MinHeap
 # Importamos PartialSolution del backtracking
-from Teoría.bt_scheme import PartialSolution
+from Utils.bt_scheme import PartialSolution
 
 Solution = TypeVar('Solution')
 

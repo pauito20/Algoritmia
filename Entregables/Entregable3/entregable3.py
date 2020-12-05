@@ -1,10 +1,9 @@
-import os
 import sys
 from typing import *
 
 from typing import Tuple
 
-from Teoría.bt_scheme import PartialSolutionWithOptimization, Solution, BacktrackingOptSolver, State
+from bt_scheme import PartialSolutionWithOptimization, Solution, BacktrackingOptSolver, State
 
 Pos = Tuple[int, int]
 
