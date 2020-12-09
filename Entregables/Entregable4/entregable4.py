@@ -1,23 +1,10 @@
 import sys
+from typing import List, Optional
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def funambulista(edificios: List[int]) -> Optional[List[int]]:
+    def funambilistaRecursive():
+        pass
 
 
 
