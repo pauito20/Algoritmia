@@ -3,21 +3,32 @@ import sys
 from typing import List, Optional
 
 
-def funambulista(edificios: List[int]) -> Optional[List[int]]:
-    def funambilistaRecursive(i_ed_peq: int, i_ed_gran: int,i_ed_valle: int  ) -> Optional[List[int]]:
+def funambulista(edificios: List[int]):
+    def funambilistaRecursive(i_ed_1: int, i_ed_2: int, i_ed_valle: int, res : List[int]):
         #Caso base
-        if len(edificios) <= 1:
-            return []
+        print(i_ed_1,i_ed_2,i_ed_valle)
+        if i_ed_valle == i_ed_2:
+           return res
         #Recursividad
+        if edificios[i_ed_1] > edificios[i_ed_2]:
+            print(f"Recurividad 1")
+            return funambilistaRecursive(i_ed_1, i_ed_2 - 1 , i_ed_valle, res)
+        if edificios[i_ed_1] < edificios[i_ed_valle]:
+            print(f"Recurividad 2")
+            return funambilistaRecursive(i_ed_1 + 1, i_ed_2, i_ed_valle + 1, res)
 
 
+        if (abs(res[0]) - abs(res[2])) < (edificios[i_ed_1] - edificios[i_ed_valle]):
+            res = [i_ed_1, i_ed_2, i_ed_valle]
+        print(f"Recurividad 3")
+        return funambilistaRecursive(i_ed_1 + 1, i_ed_2, i_ed_valle +1, res)
 
-
+    if len(edificios) <= 2:
+        return [-1]
     #Llamada de la función recursiva inicial
-    return funambilistaRecursive(-1,-1,-1)
+    return funambilistaRecursive(0, len(edificios) - 1, 1, [-1,-1,-1])
 
 if __name__ == '__main__':
-
 
 
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
@@ -34,7 +45,7 @@ if __name__ == '__main__':
     alturas = []
     for i in range(numEdificios):
         linea = (str(file.readline().rstrip('\n')))
-        alturas.append(linea)
+        alturas.append(int(linea))
 
     '''
     
@@ -50,15 +61,20 @@ if __name__ == '__main__':
     print("\n----- Parámetros de entrada -----")
     print("Nº de edificios: ", numEdificios)
     print("Alturas de los edificios: ", alturas)
-    '''
+
+
     res = funambulista(alturas)
+
     print("\n----- RESULTADO -----")
-    
-    if len(res) == 0:
+
+    print(f"el resl: {res}")
+    if res[0] == -1:
         print("NO HAY SOLUCIÓN")
     else:
-        print("El resultado es: ", res)
+        print()
+        res.append(alturas[res[0]] - alturas[res[2]])
+        print(res)
 
-    '''
+
 
 
