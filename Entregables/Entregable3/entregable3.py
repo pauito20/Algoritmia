@@ -206,7 +206,7 @@ if __name__ == '__main__':
     if haySolucion:
         for e in solu:
             res += e
-    print(res)
+        print(res)
 
     if not haySolucion:
         print(f"NO HAY SOLUCIÓN CON LOS MOVIMIENTOS PEDIDOS")

@@ -1,0 +1,10 @@
+puzle_3_max30.sol	0.180
+puzle_3_max83.sol	4.248
+puzle_3_max84.sol	4.343
+puzle_3_max120.sol	7.873
+puzle_4_max89.sol	6.939
+puzle_4_max90.sol	7.198
+puzle_4_max100.sol	8.650
+puzle_5_max97.sol	3.844
+puzle_5_max98.sol	4.064
+puzle_5_max150.sol	7.978
