@@ -27,31 +27,38 @@ def funambulista(edificios: List[int]):
         #Caso base: Hay 2 o menos edificios
         if i_ed_1 == i_ed_2 or i_ed_1 == i_ed_2+1:
             return res
+
         #Recursividad miramos derecha, izquierda y centro y nos quedamos la mejor opcion (mayor valle)
-        else:
-            centro = (i_ed_1 + i_ed_2) // 2
-            res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
-            res_der = funambilistaRecursive(centro+1, i_ed_2, centro+2, res)
-            #Recorremos por el centro (por si hemos partido la solución)
-            res_centro = [-1, -1, -1, -1]
+        centro = (i_ed_1 + i_ed_2) // 2
+        valle = -1
+        res_centro = [-1, -1, -1, -1]
+        for i in range(i_ed_1 + 1, i_ed_2 - 1):
+            valle = min(valle, i)
+            if (edificios[i] > min(edificios[i_ed_1], edificios[i_ed_2])):
+                res_centro = [i_ed_1, i_ed_2, valle, -2]
+
+        if [res_centro[3] != -2]:
+            res_centro = [i_ed_1, i_ed_2, valle, min(edificios[i_ed_1], edificios[i_ed_2]) - edificios[valle]]
+        res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
+        res_der = funambilistaRecursive(centro+1, i_ed_2, centro+2, res)
+        #Recorremos por el centro (por si hemos partido la solución)
 
 
+        # Si la h de res es menor que h de la res_izq
+        if edificios[res[3]] < edificios[res_izq[3]]:
+            res = res_izq
+        # Si la h de res es menor que h de res_der
+        elif edificios[res[3]] < edificios[res_der[3]]:
+            res = res_der
+            # Si la h de res es menor que h de res_centro
+        elif edificios[res[3]] < edificios[res_centro[3]]:
+            res = res_centro
 
+        return res
 
-
-            #Si la h de res es menor que h de la res_izq
-            if edificios[res[3]] < edificios[res_izq[3]]:
-                res = res_izq
-            #Si la h de res es menor que h de res_der
-            elif edificios[res[3]] < edificios[res_der[3]]:
-                res = res_der
-                #Si la h de res es menor que h de res_centro
-            elif edificios[res[3]] < edificios[res_centro[3]]:
-                res = res_centro
-            return res
 
     #Caso base: Lista de edificios vacia
-    if len(edificios) == 0:
+    if len(edificios) <= 2:
         return [-1]
     #Llamada de la función recursiva inicial
     return funambilistaRecursive(0, len(edificios) - 1, 1, [-1, -1, -1, -1])
