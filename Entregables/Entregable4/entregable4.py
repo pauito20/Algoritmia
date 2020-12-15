@@ -2,6 +2,8 @@ import os
 import sys
 from typing import List, Optional
 
+from bt_scheme import infinity
+
 
 def funambulista(edificios: List[int]):
     def funambilistaRecursive(i_ed_1: int, i_ed_2: int, i_ed_valle: int, res: List[int]):
@@ -24,34 +26,37 @@ def funambulista(edificios: List[int]):
                print(f"Recurividad 3")
                return funambilistaRecursive(i_ed_1 + 1, i_ed_2, i_ed_valle +1, res)
            '''
+
         #Caso base: Hay 2 o menos edificios
         if i_ed_1 == i_ed_2 or i_ed_1 == i_ed_2+1:
             return res
-
+        print(i_ed_1, i_ed_2, i_ed_valle)
         #Recursividad miramos derecha, izquierda y centro y nos quedamos la mejor opcion (mayor valle)
         centro = (i_ed_1 + i_ed_2) // 2
-        valle = -1
-        res_centro = [-1, -1, -1, -1]
-        for i in range(i_ed_1 + 1, i_ed_2 - 1):
-            valle = min(valle, i)
-            if (edificios[i] > min(edificios[i_ed_1], edificios[i_ed_2])):
-                res_centro = [i_ed_1, i_ed_2, valle, -2]
 
-        if [res_centro[3] != -2]:
-            res_centro = [i_ed_1, i_ed_2, valle, min(edificios[i_ed_1], edificios[i_ed_2]) - edificios[valle]]
         res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
         res_der = funambilistaRecursive(centro+1, i_ed_2, centro+2, res)
         #Recorremos por el centro (por si hemos partido la solución)
+        res_centro = [-1, -1, -1, -1]
 
+
+
+
+
+
+
+
+        if [res_centro[3] == -1]:
+            res_centro = [i_ed_1, i_ed_2, valle, min(edificios[i_ed_1], edificios[i_ed_2]) - edificios[valle]]
 
         # Si la h de res es menor que h de la res_izq
-        if edificios[res[3]] < edificios[res_izq[3]]:
+        if res[3] < res_izq[3]:
             res = res_izq
         # Si la h de res es menor que h de res_der
-        elif edificios[res[3]] < edificios[res_der[3]]:
+        elif res[3] < res_der[3]:
             res = res_der
             # Si la h de res es menor que h de res_centro
-        elif edificios[res[3]] < edificios[res_centro[3]]:
+        elif res[3] < res_centro[3]:
             res = res_centro
 
         return res
@@ -106,8 +111,7 @@ if __name__ == '__main__':
     if res[0] == -1:
         print("NO HAY SOLUCIÓN")
     else:
-        print()
-        res.append(alturas[res[0]] - alturas[res[2]])
+
         print("Resultado FINAL OBTENIDO: ", res)
 
 
