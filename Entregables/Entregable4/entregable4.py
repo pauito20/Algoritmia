@@ -30,7 +30,7 @@ def funambulista(edificios: List[int]):
         #Caso base: Hay 2 o menos edificios
         if i_ed_1 == i_ed_2 or i_ed_1 == i_ed_2+1:
             return res
-        print(i_ed_1, i_ed_2, i_ed_valle)
+
         #Recursividad miramos derecha, izquierda y centro y nos quedamos la mejor opcion (mayor valle)
         centro = (i_ed_1 + i_ed_2) // 2
 
@@ -39,15 +39,53 @@ def funambulista(edificios: List[int]):
         #Recorremos por el centro (por si hemos partido la solución)
         res_centro = [-1, -1, -1, -1]
 
+        #POR LA IZQUIERDA Y DISMINUIMOS
+        ind_izq = centro -1
+        ind_grande_izq = ind_izq
+        ind_peq_izq = i_ed_1
+        ind_valle = -1
+        valle = infinity
+        while ind_izq > 0:
+            if edificios[ind_izq]-1 < edificios[ind_izq]:
+                #Si el edificio de antes es más bajito
+                if edificios[ind_izq]-1 < valle:
+                    #Más bajito del recorrido
+                    valle = edificios[ind_izq-1]
+                    ind_valle = ind_izq-1
+                if ind_izq-1 != ind_peq_izq and edificios[ind_izq-1] > edificios[ind_peq_izq]:
+                    ind_peq_izq = ind_izq-1
 
+                ind_izq -= 1
+            else:
+                #Si hay un edificio alto por el medio
+                ind_grande_izq = ind_izq-1
+                ind_izq -= 1
 
+        res_centro_izq = [ind_peq_izq, ind_grande_izq, ind_valle, min(edificios[ind_peq_izq], edificios[ind_grande_izq]) - valle]
 
+        #POR LA DERECHA Y AUMENTAMOS
+        ind_der = centro
+        ind_grande_der = i_ed_2
+        ind_peq_der = centro
+        ind_valle = -1
+        valle = infinity
+        while ind_der < i_ed_2-1:
+            #Si el edificio de después es más bajito
+            if edificios[ind_der]+1 < edificios[ind_der]:
+                #Si el edificio siguiente es más bajito
+                if edificios[ind_der]+1 < valle:
+                    valle = edificios[ind_der+1]
+                    ind_valle = ind_der+1
+                if ind_der+1 != ind_grande_der and edificios[ind_der+1] > edificios[ind_grande_der]:
+                    ind_grande_der = ind_der+1
+                ind_der+=1
+            else:
+                #Si hay un edificio alto por el medio
+                ind_peq_der = ind_der+1
+                ind_der+=1
+        res_centro_der = [ind_peq_der, ind_grande_der, ind_valle, min(edificios[ind_peq_der], edificios[ind_grande_der]) - valle]
 
-
-
-
-        if [res_centro[3] == -1]:
-            res_centro = [i_ed_1, i_ed_2, valle, min(edificios[i_ed_1], edificios[i_ed_2]) - edificios[valle]]
+        #FUSIONAMOS RE CENTRO DERECHA E IZQUIERDA Y OBTENEMOS RES CENTRO
 
         # Si la h de res es menor que h de la res_izq
         if res[3] < res_izq[3]:
