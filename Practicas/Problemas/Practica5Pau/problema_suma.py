@@ -10,7 +10,7 @@ def suma_max(a: List[int]) -> Tuple[int, int, int]:
             return a[b], b, b+1         # trivial_solution
         else:                           # decrease
             h = (b + e)//2
-            print("centro = ", h)
+            #print("centro = ", h)
             mejor_izq = rec(b, h)
             mejor_der = rec(h, e)
 
@@ -36,12 +36,12 @@ def suma_max(a: List[int]) -> Tuple[int, int, int]:
                 else:
                     break
 
-            mejor_centro = suma_mejor_izq + suma_mejor_der, indice_izq, indice_der+1
-            print("-"*10)
-            print("Mejor derecha: ", mejor_der)
-            print("Mejor izquierda: ", mejor_izq)
-            print("Mejor centro: ", mejor_centro)
-            print("_"*10)
+            mejor_centro = suma_mejor_izq + suma_mejor_der, indice_izq, indice_der
+            #print("-"*10)
+            #print("Mejor derecha: ", mejor_der)
+            #print("Mejor izquierda: ", mejor_izq)
+            #print("Mejor centro: ", mejor_centro)
+            #print("_"*10)
             return max(mejor_izq, mejor_der, mejor_centro)
 
     return rec(0, len(a))
@@ -52,4 +52,7 @@ if __name__ == "__main__":
     print("######################### Sol 2 ##############################")
     print(suma_max([1, -1, 1, -1, 1, 2, 3]))
     print("######################### Sol 3 ##############################")
-    print(suma_max([1, 1, -1, -1, 1, 1, 1, 1]))
+    print(suma_max([1, 1, -1, -1, 1, 1, 1, 1, 1]))
+
+
+    print(suma_max([2, 2, 2, -2, 2, -1]))
