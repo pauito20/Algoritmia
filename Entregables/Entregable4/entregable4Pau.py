@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
 
 
-    if res == None or res[0] == res[1] or res[0] == res[1]+1:
+    if res == None or res[0] == res[1] or res[0]+1 == res[1]:
         print("NO HAY SOLUCIÓN")
     else:
         print(res[0], res[1], res[2], res[3])
