@@ -1,8 +1,6 @@
-import os
-import sys
-from typing import List, Optional
 
-from bt_scheme import infinity
+import sys
+from typing import List
 
 
 def funambulista(edificios: List[int]):
@@ -10,20 +8,25 @@ def funambulista(edificios: List[int]):
         # Caso base: Hay 2 o menos edificios
         if i_ed_1 == i_ed_2 or i_ed_1 == i_ed_2 - 1:
             return res
+        if len(edificios) < 3:
+            return None
+        if len(edificios) == 3:
+            if edificios[i_ed_1] > edificios[i_ed_1+1] and edificios[i_ed_1+1] < edificios[i_ed_2]:
+                return [i_ed_1, i_ed_2, i_ed_2-1, min(edificios[i_ed_1], edificios[i_ed_2])-edificios[i_ed_1+1]]
+
         # Recursividad miramos derecha, izquierda y centro y nos quedamos la mejor opcion (mayor valle)
         centro = (i_ed_1 + i_ed_2) // 2
-        res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
-        res_der = funambilistaRecursive(centro + 1, i_ed_2, centro + 2, res)
 
         #Miramos el máximo de la izquierda
-        ind_izq = centro
+        ind_izq = i_ed_1
         h_max_izq = 0
         ind_max_izq = -1
-        while ind_izq >= 0:
+
+        while ind_izq < centro:
             if h_max_izq < edificios[ind_izq]:
                 h_max_izq = edificios[ind_izq]
                 ind_max_izq = ind_izq
-            ind_izq -= 1
+            ind_izq += 1
 
         #Vamos hacia la derecha, si cogemos un edificio mayor al de la izquierda paramos
         #ind_der = ind_max_izq+1
@@ -31,8 +34,8 @@ def funambulista(edificios: List[int]):
         h_max_der = 0
         ind_max_der = -1
 
-        while ind_der < len(edificios):
-            if h_max_der < edificios[ind_der]:
+        while ind_der < i_ed_2:
+            if h_max_der < edificios[ind_max_izq]:
                 h_max_der = edificios[ind_der]
                 ind_max_der = ind_der
             if edificios[ind_max_der] > edificios[ind_max_izq]:
@@ -40,34 +43,39 @@ def funambulista(edificios: List[int]):
                 break
             ind_der += 1
 
-        i = ind_max_izq +1
-        valle = -1
-        h_valle = infinity
+        if edificios[i_ed_2] > edificios[ind_max_der]:
+            ind_max_der = i_ed_2
+
+        i = ind_max_izq + 1
+        valle = i
+        h_valle = edificios[i]
 
         while i < ind_max_der:
-            if edificios[i] < h_valle:
+            if edificios[i] <= h_valle:
                 h_valle = edificios[i]
                 valle = i
             i += 1
 
         res_centro = [ind_max_izq, ind_max_der, valle, min(edificios[ind_max_izq], edificios[ind_max_der])-edificios[valle]]
+        res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
+        if res_izq is not None and res_izq[3] > res_centro[3]:
+            res_centro = res_izq
 
-        if res_izq[3] > res_der[3] and res_izq[3] >= res_centro[3]:
-            return res_izq
-        elif res_der[3] > res_izq[3] and res_der[3] >= res_centro[3]:
-            return res_der
-        else:
-            return res_centro
+        res_der = funambilistaRecursive(centro + 1, i_ed_2, centro + 2, res)
+        if res_der is not None and res_der[3] > res_centro[3]:
+            res_centro = res_der
+
+        return res_centro
 
     # Caso base: Lista de edificios vacia
     if len(edificios) <= 2:
-        return [-1]
+        return None
         # Llamada de la función recursiva inicial
     return funambilistaRecursive(0, len(edificios) - 1, 1, [-1, -1, -1, -1])
 
 
 if __name__ == '__main__':
-
+    '''
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
@@ -82,8 +90,8 @@ if __name__ == '__main__':
     for i in range(numEdificios):
         linea = (str(file.readline().rstrip('\n')))
         alturas.append(int(linea))
-
     '''
+
 
     # Convertimos el fichero en una lista de líneas
     lineas_fich = sys.stdin.readlines()
@@ -92,15 +100,16 @@ if __name__ == '__main__':
     alturas = []
     for i in range(1, len(lineas_fich)):
         alturas.append(int(lineas_fich[i]))
-    '''
+
 
 
     res = funambulista(alturas)
 
 
 
-    if res[0] == -1:
+    if res == None or res[0] == res[1] or res[0] == res[1]+1:
         print("NO HAY SOLUCIÓN")
     else:
         print(res[0], res[1], res[2], res[3])
+
 
