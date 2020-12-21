@@ -26,9 +26,11 @@ def funambulista(edificios: List[int]):
             ind_izq -= 1
 
         #Vamos hacia la derecha, si cogemos un edificio mayor al de la izquierda paramos
-        ind_der = ind_max_izq+1
+        #ind_der = ind_max_izq+1
+        ind_der = centro
         h_max_der = 0
         ind_max_der = -1
+
         while ind_der < len(edificios):
             if h_max_der < edificios[ind_der]:
                 h_max_der = edificios[ind_der]
@@ -41,6 +43,7 @@ def funambulista(edificios: List[int]):
         i = ind_max_izq +1
         valle = -1
         h_valle = infinity
+
         while i < ind_max_der:
             if edificios[i] < h_valle:
                 h_valle = edificios[i]
@@ -91,17 +94,13 @@ if __name__ == '__main__':
         alturas.append(int(lineas_fich[i]))
     '''
 
-    print("\n----- Parámetros de entrada -----")
-    print("Nº de edificios: ", numEdificios)
-    print("Alturas de los edificios: ", alturas)
 
     res = funambulista(alturas)
 
-    print("\n----- RESULTADO -----")
+
 
     if res[0] == -1:
         print("NO HAY SOLUCIÓN")
     else:
-
-        print("Resultado FINAL OBTENIDO: ", res)
+        print(res[0], res[1], res[2], res[3])
 
