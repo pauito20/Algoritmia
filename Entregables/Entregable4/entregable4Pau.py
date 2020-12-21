@@ -1,6 +1,8 @@
-
+import os
 import sys
-from typing import List
+from typing import List, Optional
+
+
 
 
 def funambulista(edificios: List[int]):
@@ -42,6 +44,17 @@ def funambulista(edificios: List[int]):
                 #Paramos, ya que max_izq es más pequeño max_der (pasamos cable)
                 break
             ind_der += 1
+
+        else:
+            ind_izq = centro-1
+            i = ind_izq -1
+            while i >= i_ed_1:
+                if edificios[i] > edificios[ind_izq]:
+                    ind_max_izq = i
+                    if edificios[ind_max_izq] >= edificios[ind_max_der]:
+                        break
+                i -= 1
+
 
         if edificios[i_ed_2] > edificios[ind_max_der]:
             ind_max_der = i_ed_2
@@ -107,7 +120,7 @@ if __name__ == '__main__':
 
 
 
-    if res == None or res[0] == res[1] or res[0]+1 == res[1] or res[3] == 0:
+    if res == None or res[0] == res[1] or res[0]+ 1 == res[1] or res[3] == 0:
         print("NO HAY SOLUCIÓN")
     else:
         print(res[0], res[1], res[2], res[3])
