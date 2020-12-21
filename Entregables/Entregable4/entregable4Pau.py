@@ -73,10 +73,8 @@ def funambulista(edificios: List[int]):
         res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
         if res_izq is not None and res_izq[3] > res_centro[3]:
             res_centro = res_izq
-            print("Izquierda: ", res_centro)
         res_der = funambilistaRecursive(centro, i_ed_2, centro + 1, res)
         if res_der is not None and res_der[3] > res_centro[3]:
-            print("Derecha: " , res_centro)
             res_centro = res_der
 
         return res_centro
