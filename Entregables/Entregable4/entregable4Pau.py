@@ -33,28 +33,28 @@ def funambulista(edificios: List[int]):
         #Vamos hacia la derecha, si cogemos un edificio mayor al de la izquierda paramos
         #ind_der = ind_max_izq+1
         ind_der = centro
-        h_max_der = 0
+        h_max_der = edificios[ind_der]
         ind_max_der = -1
 
         while ind_der < i_ed_2:
-            if h_max_der < edificios[ind_max_izq]:
+            if h_max_der < edificios[ind_der]:
                 h_max_der = edificios[ind_der]
                 ind_max_der = ind_der
-            if edificios[ind_max_der] > edificios[ind_max_izq]:
-                #Paramos, ya que max_izq es más pequeño max_der (pasamos cable)
-                break
+                if edificios[ind_max_der] > edificios[ind_max_izq]:
+                    #Paramos, ya que max_izq es más pequeño max_der (pasamos cable)
+                    break
             ind_der += 1
 
         else:
             ind_izq = centro-1
-            i = ind_izq -1
+            i = centro -2
             while i >= i_ed_1:
                 if edificios[i] > edificios[ind_izq]:
-                    ind_max_izq = i
-                    if edificios[ind_max_izq] >= edificios[ind_max_der]:
+                    ind_izq = i
+                    if edificios[ind_izq] >= edificios[ind_max_der]:
                         break
                 i -= 1
-
+            ind_max_izq = ind_izq
 
         if edificios[i_ed_2] > edificios[ind_max_der]:
             ind_max_der = i_ed_2
@@ -73,9 +73,10 @@ def funambulista(edificios: List[int]):
         res_izq = funambilistaRecursive(i_ed_1, centro, i_ed_valle, res)
         if res_izq is not None and res_izq[3] > res_centro[3]:
             res_centro = res_izq
-
-        res_der = funambilistaRecursive(centro + 1, i_ed_2, centro + 2, res)
+            print("Izquierda: ", res_centro)
+        res_der = funambilistaRecursive(centro, i_ed_2, centro + 1, res)
         if res_der is not None and res_der[3] > res_centro[3]:
+            print("Derecha: " , res_centro)
             res_centro = res_der
 
         return res_centro
