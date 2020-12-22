@@ -8,5 +8,5 @@
 
 
 if __name__ == '__main__':
-    for i in range(1000):
+    for i in range(10000000):
         print("TAMOS LOCOS PRIMO CHE KLK")
