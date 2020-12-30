@@ -1,5 +1,19 @@
 import os
 import sys
+from typing import List
+
+
+def minaDiamantes(tablero) -> int:
+    def _minaDiamantes(fila, columna, diamantesAcomulados):
+        if tablero[fila][columna] != 0:
+            diamantesAcomulados += tablero[fila][columna]
+
+
+    diamantesAcomulados = 0
+    _minaDiamantes(0,0,diamantesAcomulados)
+    return diamantesAcomulados
+
+
 
 
 def creaMatriz(filas: int, columnas: int):
