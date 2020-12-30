@@ -9,6 +9,9 @@ def minaDiamantes(tablero) -> int:
             diamantesAcomulados += tablero[fila][columna]
 
 
+        #rellenar LOOOOOOOOL
+
+
     diamantesAcomulados = 0
     _minaDiamantes(0,0,diamantesAcomulados)
     return diamantesAcomulados
