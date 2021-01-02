@@ -68,3 +68,5 @@ if __name__ == '__main__':
     for per_sq in squares():
         print(per_sq)
 
+    tupla = [(1,), (2,)]
+    print(tupla[-1])
