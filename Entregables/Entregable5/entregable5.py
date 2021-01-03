@@ -13,7 +13,7 @@ def minaDiamantes(tablero) -> int:
 
 
     diamantesAcomulados = 0
-    _minaDiamantes(0,0,diamantesAcomulados)
+    _minaDiamantes(0, 0, diamantesAcomulados)
     return diamantesAcomulados
 
 
@@ -31,7 +31,7 @@ def creaMatriz(filas: int, columnas: int):
 
 if __name__ == '__main__':
 
-
+    sys.setrecursionlimit(5000)
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
@@ -59,7 +59,9 @@ if __name__ == '__main__':
 
     print(filas, columnas)
     print(numDiamantes)
-    print(tablero)
+    print("Tablero: ")
+    for r in tablero:
+        print("\t", r)
 
     '''
 
