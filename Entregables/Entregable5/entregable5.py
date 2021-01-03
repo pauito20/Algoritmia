@@ -7,17 +7,30 @@ def minaDiamantes(tablero) -> int:
     def _minaDiamantes(fila, columna, diamantesAcomulados):
         if tablero[fila][columna] != 0:
             diamantesAcomulados += tablero[fila][columna]
+        max = 0
+        down = 0
+        right = 0
+        if fila+1 < len(tablero) and columna < len(tablero[0]):
+            #print("posicion abajo=", tablero[fila + 1][columna])
+            down = _minaDiamantes(fila+1, columna, diamantesAcomulados)
+
+        if columna+1 < len(tablero[0]) and fila < len(tablero):
+            #print("posicion arriba=", tablero[fila][columna + 1])
+            right = _minaDiamantes(fila, columna+1, diamantesAcomulados)
+
+        if down > diamantesAcomulados:
+            diamantesAcomulados = down
+        if right > diamantesAcomulados:
+            diamantesAcomulados = right
 
 
-        #rellenar LOOOOOOOOL
+        return diamantesAcomulados
+
 
 
     diamantesAcomulados = 0
-    _minaDiamantes(0, 0, diamantesAcomulados)
-    return diamantesAcomulados
 
-
-
+    return _minaDiamantes(0, 0, diamantesAcomulados)
 
 def creaMatriz(filas: int, columnas: int):
     matriz = []
@@ -56,16 +69,16 @@ if __name__ == '__main__':
         tablero[f][c] = d
         i += 1
 
-
     print(filas, columnas)
     print(numDiamantes)
     print("Tablero: ")
     for r in tablero:
         print("\t", r)
 
-    '''
+    print("\n PICO PALA PICO PALA: ")
+    print(minaDiamantes(tablero))
 
-    
+    '''
     # Convertimos el fichero en una lista de líneas
     lineas_fich = sys.stdin.readlines()
     filas = lineas_fich[0].split(" ")[0]
@@ -76,9 +89,14 @@ if __name__ == '__main__':
 
     for i in range(2, numDiamantes + 2):
         f, c, d = int(lineas_fich[i])
-        tablero[f][c] = d
-    
+        tablero[f][c] = d  
     '''
+
+
+
+
+
+
 
 
 
