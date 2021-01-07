@@ -2,7 +2,7 @@ from itertools import groupby
 from random import seed, randint
 from typing import *
 
-from Practicas.Problemas.Practica4Gonzalo.bab_schemeGonzalo import BabPartialSolution, Solution, BabSolver
+from Practicas.Problemas.Practica4Gonzalo.bab_schemeGonzalo import BabPartialSolution, BabSolver, Solution
 
 
 def binpacking_solve(objects: List[int], capacity: int):
@@ -16,30 +16,34 @@ def binpacking_solve(objects: List[int], capacity: int):
 
         # TODO: IMPLEMENTAR - Relaja el problema. Trata los objetos que quedan como si fueran un líquido
         def _calc_opt_bound(self) -> Union[int, float]:
-            #return len(self.container_weights)  # AHORA ES DEMASIADO OPTIMISTA
-            if self.n == 0:
-                return (sum(objects) + capacity - 1) // capacity
-            if self.n == len(objects):
-                return len(self.container_weights)
+            pesosContenedores = self.container_weights
+            sol = self.n
+            for objeto in range(self.n, len(objects)):
+                for contenedor in range(pesosContenedores):
+                    if objects[objeto] + pesosContenedores[contenedor] <= capacity:
+                        pesosContenedores[contenedor] += objects[objeto]
+                        sol += (contenedor,)
+                    else:
+                        libre = capacity - pesosContenedores[contenedor]
+                        ocupado = libre / objects[objeto]
+                        pesosContenedores[contenedor] += ocupado
+                        pesosContenedores[contenedor + 1] += (objects[objeto] - ocupado)
+                        sol += (contenedor, )
+                        sol += (contenedor + 1, )
+                        break
 
-            max_hueco = capacity - min(self.container_weights)
-            peso_objetos = 0
-            for elem in objects[self.n:]:
-                if elem <= max_hueco:
-                    peso_objetos += elem
-            min_obj = min(objects[self.n:])
-            hueco_libre = 0
-            for w in self.container_weights:
-                if capacity - w >= min_obj:
-                    hueco_libre += capacity - w
-            usado = min(peso_objetos, hueco_libre)
-            adicionales = max(0, (sum(objects[self.n:]) - usado + capacity -1) // capacity )
-            return len(self.container_weights) + adicionales
+            return sol
 
         # TODO: IMPLEMENTAR - Algoritmo voraz. Completa la solución parcial actual con "En el primero en el que quepa"
         def _calc_pes_bound(self) -> Union[int, float]:
-            return len(self.container_weights) + (len(objects) - self.n)  # AHORA ES DEMASIADO PESIMISTA
-
+            pesosContenedores = self.container_weights
+            sol = self.n
+            for objeto in range(self.n, len(objects)):
+                for contenedor in range(pesosContenedores):
+                    if objects[objeto] + pesosContenedores[contenedor] <= capacity:
+                        pesosContenedores[contenedor] += objects[objeto]
+                        sol += (contenedor, )
+            return sol
 
 
         def is_solution(self) -> bool:
@@ -91,10 +95,8 @@ def create_exact_binpacking_problem(num_containers: int, objects_per_container: 
 if __name__ == "__main__":
     # Descomenta la instancia del problema que quieras resolver:
     C, objs = 10, [6, 6, 3, 3, 2, 2, 2, 2, 2, 2]  # SOLUCIÓN ÓPTIMA: 3 contenedores
-    #C, objs = create_exact_binpacking_problem(6, 3)  # SOLUCIÓN ÓPTIMA: 6 contenedores
-    #C, objs = create_exact_binpacking_problem(12, 3) # SOLUCIÓN ÓPTIMA: 12 contenedores
-
-
+    # C, objs = create_exact_binpacking_problem(6, 3)  # SOLUCIÓN ÓPTIMA: 6 contenedores
+    # C, objs = create_exact_binpacking_problem(12, 3) # SOLUCIÓN ÓPTIMA: 12 contenedores
 
     print("PROBLEM TO SOLVE:")
     print("\tContainer capacity:", C)

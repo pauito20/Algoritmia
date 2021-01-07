@@ -4,44 +4,42 @@ from typing import List
 
 
 def minaDiamantes(tablero) -> int:
-    def _minaDiamantes(fila, columna, diamantesAcomulados):
-        if tablero[fila][columna] != 0:
-            diamantesAcomulados += tablero[fila][columna]
-        down = 0
-        right = 0
-        if fila + 1 < len(tablero) and columna < len(tablero[0]):
-            #print("posicion abajo=", tablero[fila + 1][columna])
-            down = _minaDiamantes(fila+1, columna, diamantesAcomulados)
+    def _minaDiamantes(f, c, diamantesAcomulados) -> int:
+        '''
 
-        if columna+1 < len(tablero[0]) and fila < len(tablero):
-            #print("posicion arriba=", tablero[fila][columna + 1])
-            right = _minaDiamantes(fila, columna+1, diamantesAcomulados)
+        if tablero[f][c] != 0:
+            diamantesAcomulados += tablero[f][c]
 
-        if down > diamantesAcomulados:
-            diamantesAcomulados = down
-        if right > diamantesAcomulados:
-            diamantesAcomulados = right
+        if (f, c) not in mem:
+            print(mem)
+            if f + 1 < len(tablero) and c + 1 < len(tablero[0]):
+                mem[f, c] = max(_minaDiamantes(f + 1, c, diamantesAcomulados),
+                                _minaDiamantes(f, c + 1, diamantesAcomulados))
+            elif f + 1 < len(tablero):
+                mem[f, c] = _minaDiamantes(f + 1, c, diamantesAcomulados)
+            elif c + 1 < len(tablero[0]):
+                mem[f, c] = _minaDiamantes(f, c + 1, diamantesAcomulados)
 
+        return mem[f, c]
+
+        '''
+
+        if tablero[f][c] != 0:
+            diamantesAcomulados += tablero[f][c]
+
+        if f + 1 < len(tablero) and c + 1 < len(tablero[0]):
+            return max(_minaDiamantes(f + 1, c, diamantesAcomulados),
+                        _minaDiamantes(f, c + 1, diamantesAcomulados))
+        elif f + 1 < len(tablero):
+            return _minaDiamantes(f + 1, c, diamantesAcomulados)
+        elif c + 1 < len(tablero[0]):
+            return _minaDiamantes(f, c + 1, diamantesAcomulados)
 
         return diamantesAcomulados
 
-    def _recursiva2(fila, columna):
-        if (fila, columna) not in men:
-            print(fila, columna)
-            if len(men) == 0:
-                men[fila, columna] = tablero[fila][columna]
-
-        men[fila, columna] = max(men[fila, columna], men[fila, columna] + _recursiva2(fila + 1, columna))
-        men[fila, columna] = max(men[fila, columna], men[fila, columna] + _recursiva2(fila, columna + 1))
-
-        return men[fila, columna]
-
-
-
-    men = {}
+    mem = {}
     diamantesAcomulados = 0
-
-    return _minaDiamantes(0, 0, diamantesAcomulados), _recursiva2(0, 0)
+    return  _minaDiamantes(0, 0, diamantesAcomulados)
 
 
 def creaMatriz(filas: int, columnas: int):
@@ -103,12 +101,3 @@ if __name__ == '__main__':
         f, c, d = int(lineas_fich[i])
         tablero[f][c] = d  
     '''
-
-
-
-
-
-
-
-
-

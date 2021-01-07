@@ -8,7 +8,7 @@ def recursos_rec(v: Dict[Tuple[int, int], int], m: List[int], U: int) -> int:
         if n == 0:
             return 0
         else:
-            return max(B(n - 1, u - k) + v[n - 1, k] for k in range(min(m[n -1], u) + 1) )
+            return max(B(n - 1, u - k) + v[n - 1, k] for k in range(min(m[n - 1], u) + 1))
 
     N = len(m)
     return B(N, U)
@@ -21,7 +21,7 @@ def recursos_rec_mem(v: Dict[Tuple[int, int], int], m: List[int], U: int) -> int
             return 0
         else:
             if (n, u) not in mem:
-                mem[n ,u] = max(B(n - 1, u - k) + v[n - 1, k] for k in range(min(m[n -1], u) + 1) )
+                mem[n, u] = max(B(n - 1, u - k) + v[n - 1, k] for k in range(min(m[n - 1], u) + 1))
             return mem[n, u]
     N = len(m)
     mem = {}

@@ -1,14 +1,14 @@
 from random import randint, seed
 from typing import *
 
-from Practicas.Problemas.Practica4Gonzalo.bab_schemeGonzalo import BabPartialSolution, Solution, BabSolver
+
+
+from Practicas.Problemas.Practica4Gonzalo.bab_schemeGonzalo import BabPartialSolution, BabSolver, Solution
 
 
 # IMPORTANTE:
 # Para facilitar la implementación y no tener que trabajar con un nivel adicional de índices, 
 # asumiremos que los objetos (listas W y V) están ordenados de mayor a menor ratio valor/peso.
-
-
 
 def knapsack_bab_solve(weights, values, capacity):
     class KnapsackBabPS(BabPartialSolution):
@@ -22,53 +22,27 @@ def knapsack_bab_solve(weights, values, capacity):
 
         # TODO: IMPLEMENTAR - relajar problema (resolver mochila continua para los objetos que quedan)
         def _calc_opt_bound(self) -> Union[int, float]:
-            #return self.current_value + sum(values[self.n:])  # AHORA ES DEMASIADO OPTIMISTA (asume que puede coger todo lo que queda)
-            peso = self.current_weight
-            valor = self.current_value
-            for elem in range(self.n, len(weights)):
-                peso_elem = weights[elem]
-                valor_elem = values[elem]
-                if peso + peso_elem <= capacity:
-                    peso += peso_elem
-                    valor += valor_elem
-                else:
-                    libre = capacity - peso
-                    ocupado = libre / peso_elem
-                    valor += ocupado * valor_elem
-                    break
-            return valor
-
+            return self.current_value + sum(values[self.n:])  # AHORA ES DEMASIADO OPTIMISTA (asume que puede coger todo lo que queda)
 
         # TODO: IMPLEMENTAR - utilizar algoritmo voraz (visto en el tema de voraces)
         def _calc_pes_bound(self) -> Union[int, float]:
-            #return self.current_value  # AHORA ES DEMASIADO PESIMISTA (asume que no puede coger nada más de lo que queda)
-            peso = self.current_weight
-            valor = self.current_value
-            for elem in range(self.n, len(weights)):
-                peso_elem = weights[elem]
-                valor_elem = values[elem]
-                if peso + peso_elem <= capacity:
-                    peso += peso_elem
-                    valor += valor_elem
-            return valor
-
+            return self.current_value  # AHORA ES DEMASIADO PESIMISTA (asume que no puede coger nada más de lo que queda)
 
         def is_solution(self) -> bool:
-            return self.n == len(values) or self.current_weight == capacity
+            return self.n == len(values)
+
         def get_solution(self) -> Solution:
             return self.current_value, self.current_weight, self.decisions
 
         def successors(self) -> Iterable["KnapsackBabPS"]:
             if self.n < len(values):
-
-                yield KnapsackBabPS(self.decisions + (0,),
-                                    self.current_weight,
-                                    self.current_value)
-                if self.current_weight + weights[self.n] <= capacity:
+                if weights[self.n] <= capacity - self.current_weight:
                     yield KnapsackBabPS(self.decisions + (1,),
                                         self.current_weight + weights[self.n],
                                         self.current_value + values[self.n])
-
+                yield KnapsackBabPS(self.decisions + (0,),
+                                    self.current_weight,
+                                    self.current_value)
 
     initial_decisions = ()
     initial_weight = 0
@@ -97,8 +71,12 @@ def create_knapsack_problem(num_objects):
 if __name__ == "__main__":
     # Tres instancias del problema. Descomenta la que quieras resolver:
     W, V, C = [2, 1, 6, 5, 6], [4, 1, 3, 2, 2], 10  # Solution: value = 8, weight = 9, decisions = (1, 1, 1, 0, 0)
-    W, V, C = create_knapsack_problem(20)          # Solution: value = 1118, weight = 344, decisions = (1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
-    W, V, C = create_knapsack_problem(35)          # Solution: value = 1830, weight = 543, decisions = (1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    # W, V, C = create_knapsack_problem(20)          # Solution: value = 1118, weight = 344, decisions = (1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+    # W, V, C = create_knapsack_problem(35)          # Solution: value = 1830, weight = 543, decisions = (1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+
+
+
 
     print("PROBLEM:")
     print("\tNum. objects:", len(W))
