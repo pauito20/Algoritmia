@@ -7,10 +7,9 @@ def minaDiamantes(tablero) -> int:
     def _minaDiamantes(fila, columna, diamantesAcomulados):
         if tablero[fila][columna] != 0:
             diamantesAcomulados += tablero[fila][columna]
-        max = 0
         down = 0
         right = 0
-        if fila+1 < len(tablero) and columna < len(tablero[0]):
+        if fila + 1 < len(tablero) and columna < len(tablero[0]):
             #print("posicion abajo=", tablero[fila + 1][columna])
             down = _minaDiamantes(fila+1, columna, diamantesAcomulados)
 
@@ -26,11 +25,24 @@ def minaDiamantes(tablero) -> int:
 
         return diamantesAcomulados
 
+    def _recursiva2(fila, columna):
+        if (fila, columna) not in men:
+            print(fila, columna)
+            if len(men) == 0:
+                men[fila, columna] = tablero[fila][columna]
+
+        men[fila, columna] = max(men[fila, columna], men[fila, columna] + _recursiva2(fila + 1, columna))
+        men[fila, columna] = max(men[fila, columna], men[fila, columna] + _recursiva2(fila, columna + 1))
+
+        return men[fila, columna]
 
 
+
+    men = {}
     diamantesAcomulados = 0
 
-    return _minaDiamantes(0, 0, diamantesAcomulados)
+    return _minaDiamantes(0, 0, diamantesAcomulados), _recursiva2(0, 0)
+
 
 def creaMatriz(filas: int, columnas: int):
     matriz = []
@@ -68,13 +80,13 @@ if __name__ == '__main__':
         d = int(linea[2])
         tablero[f][c] = d
         i += 1
-
+    '''
     print(filas, columnas)
     print(numDiamantes)
     print("Tablero: ")
     for r in tablero:
         print("\t", r)
-
+    '''
     print("\n PICO PALA PICO PALA: ")
     print(minaDiamantes(tablero))
 

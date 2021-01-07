@@ -43,10 +43,11 @@ if __name__ == '__main__':
     B = [2, 9, 1]
 
     P = [ 5, 2, 1]
-
+    '''
     print(cuerdasMAxBeneficio(M, L, B, P))
 
     for i in range(len(B)):
         print(i)
 
     print(len(B))
+    '''
