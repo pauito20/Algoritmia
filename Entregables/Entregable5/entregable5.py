@@ -5,13 +5,12 @@ from typing import List
 
 def minaDiamantes(tablero) -> int:
     def _minaDiamantes(f, c, diamantesAcomulados) -> int:
-        '''
 
         if tablero[f][c] != 0:
             diamantesAcomulados += tablero[f][c]
-
+            
         if (f, c) not in mem:
-            print(mem)
+
             if f + 1 < len(tablero) and c + 1 < len(tablero[0]):
                 mem[f, c] = max(_minaDiamantes(f + 1, c, diamantesAcomulados),
                                 _minaDiamantes(f, c + 1, diamantesAcomulados))
@@ -19,9 +18,10 @@ def minaDiamantes(tablero) -> int:
                 mem[f, c] = _minaDiamantes(f + 1, c, diamantesAcomulados)
             elif c + 1 < len(tablero[0]):
                 mem[f, c] = _minaDiamantes(f, c + 1, diamantesAcomulados)
+            else:
+                mem[f, c] = diamantesAcomulados
 
         return mem[f, c]
-
         '''
 
         if tablero[f][c] != 0:
@@ -36,7 +36,8 @@ def minaDiamantes(tablero) -> int:
             return _minaDiamantes(f, c + 1, diamantesAcomulados)
 
         return diamantesAcomulados
-
+        
+        '''
     mem = {}
     diamantesAcomulados = 0
     return  _minaDiamantes(0, 0, diamantesAcomulados)
