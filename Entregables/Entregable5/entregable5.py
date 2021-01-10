@@ -4,43 +4,32 @@ from typing import List
 
 
 def minaDiamantes(tablero) -> int:
-    def _minaDiamantes(f, c, diamantesAcomulados) -> int:
+    def _minaDiamantes(f, c) -> int:
+        diamantesAc = tablero[f][c]
 
-        if tablero[f][c] != 0:
-            diamantesAcomulados += tablero[f][c]
-            
         if (f, c) not in mem:
+            if c == 0 and f == 0:
+                mem[f, c] = diamantesAc
 
-            if f + 1 < len(tablero) and c + 1 < len(tablero[0]):
-                mem[f, c] = max(_minaDiamantes(f + 1, c, diamantesAcomulados),
-                                _minaDiamantes(f, c + 1, diamantesAcomulados))
-            elif f + 1 < len(tablero):
-                mem[f, c] = _minaDiamantes(f + 1, c, diamantesAcomulados)
-            elif c + 1 < len(tablero[0]):
-                mem[f, c] = _minaDiamantes(f, c + 1, diamantesAcomulados)
+            elif c == 0:
+                mem[f, c] = _minaDiamantes(f - 1, c) + diamantesAc
+
+
+            elif f == 0:
+                mem[f, c] = _minaDiamantes(f, c - 1) + diamantesAc
+
+
             else:
-                mem[f, c] = diamantesAcomulados
+                mem[f, c] = max(_minaDiamantes(f - 1, c) + diamantesAc,
+                                _minaDiamantes(f, c - 1) + diamantesAc)
 
         return mem[f, c]
-        '''
 
-        if tablero[f][c] != 0:
-            diamantesAcomulados += tablero[f][c]
 
-        if f + 1 < len(tablero) and c + 1 < len(tablero[0]):
-            return max(_minaDiamantes(f + 1, c, diamantesAcomulados),
-                        _minaDiamantes(f, c + 1, diamantesAcomulados))
-        elif f + 1 < len(tablero):
-            return _minaDiamantes(f + 1, c, diamantesAcomulados)
-        elif c + 1 < len(tablero[0]):
-            return _minaDiamantes(f, c + 1, diamantesAcomulados)
 
-        return diamantesAcomulados
-        
-        '''
+
     mem = {}
-    diamantesAcomulados = 0
-    return  _minaDiamantes(0, 0, diamantesAcomulados)
+    return _minaDiamantes(len(tablero)-1, len(tablero[0])-1)
 
 
 def creaMatriz(filas: int, columnas: int):
