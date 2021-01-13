@@ -88,7 +88,7 @@ if __name__ == '__main__':
     
     '''
     i = 2
-    while i < numDiamantes:
+    while i < numDiamantes + 2:
         linea = lineas_fich[i].rstrip('\n').split(" ")
         f = int(linea[0])
         c = int(linea[1])
