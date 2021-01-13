@@ -17,6 +17,7 @@ def mochila_rec(v: List[int], w: List[int], C: int) -> int:
 # Versión recursiva con memoización
 def mochila_rec_mem(v: List[int], w: List[int], C: int) -> int:
     def B(n: int, c: int) -> int:
+        print(mem)
         if n == 0:
             return 0
         if (n, c) not in mem:

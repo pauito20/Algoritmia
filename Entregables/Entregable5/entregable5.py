@@ -14,19 +14,14 @@ def minaDiamantes(tablero) -> int:
             elif c == 0:
                 mem[f, c] = _minaDiamantes(f - 1, c) + diamantesAc
 
-
             elif f == 0:
                 mem[f, c] = _minaDiamantes(f, c - 1) + diamantesAc
-
 
             else:
                 mem[f, c] = max(_minaDiamantes(f - 1, c) + diamantesAc,
                                 _minaDiamantes(f, c - 1) + diamantesAc)
 
         return mem[f, c]
-
-
-
 
     mem = {}
     return _minaDiamantes(len(tablero)-1, len(tablero[0])-1)
@@ -45,6 +40,7 @@ def creaMatriz(filas: int, columnas: int):
 if __name__ == '__main__':
 
     sys.setrecursionlimit(5000)
+    '''
     name_fich = input("Introduce el nombre(ruta) del fichero: ")
 
     if not os.path.isfile(name_fich):
@@ -68,17 +64,14 @@ if __name__ == '__main__':
         d = int(linea[2])
         tablero[f][c] = d
         i += 1
-    '''
+    
     print(filas, columnas)
     print(numDiamantes)
     print("Tablero: ")
     for r in tablero:
         print("\t", r)
     '''
-    print("\n PICO PALA PICO PALA: ")
-    print(minaDiamantes(tablero))
 
-    '''
     # Convertimos el fichero en una lista de líneas
     lineas_fich = sys.stdin.readlines()
     filas = lineas_fich[0].split(" ")[0]
@@ -90,4 +83,5 @@ if __name__ == '__main__':
     for i in range(2, numDiamantes + 2):
         f, c, d = int(lineas_fich[i])
         tablero[f][c] = d  
-    '''
+
+    print(minaDiamantes(tablero))
