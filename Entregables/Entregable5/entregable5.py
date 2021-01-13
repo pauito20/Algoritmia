@@ -81,7 +81,9 @@ if __name__ == '__main__':
     tablero = creaMatriz(filas, columnas)
 
     for i in range(2, numDiamantes + 2):
-        f, c, d = int(lineas_fich[i])
-        tablero[f][c] = d  
+        f = int(lineas_fich[i][0])
+        c = int(lineas_fich[i][1])
+        d = int(lineas_fich[i][2])
+        tablero[f][c] = d
 
     print(minaDiamantes(tablero))
