@@ -77,7 +77,7 @@ if __name__ == '__main__':
     filas = lineas_fich[0].split(" ")[0]
     columnas = lineas_fich[0].split(" ")[1]
     numDiamantes = int(lineas_fich[1])
-
+    print(filas, columnas)
     tablero = creaMatriz(filas, columnas)
 
     for i in range(2, numDiamantes + 2):
