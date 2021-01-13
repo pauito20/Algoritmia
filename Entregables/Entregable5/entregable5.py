@@ -74,10 +74,10 @@ if __name__ == '__main__':
 
     # Convertimos el fichero en una lista de líneas
     lineas_fich = sys.stdin.readlines()
-    filas = lineas_fich[0].split(" ")[0]
-    columnas = lineas_fich[0].split(" ")[1]
+    filas = int(lineas_fich[0].split(" ")[0])
+    columnas = int(lineas_fich[0].split(" ")[1])
     numDiamantes = int(lineas_fich[1])
-    print(filas, columnas)
+
     tablero = creaMatriz(filas, columnas)
 
     for i in range(2, numDiamantes + 2):
