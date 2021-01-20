@@ -1,6 +1,6 @@
 import os
 import sys
-from typing import List
+
 
 
 def minaDiamantes(tablero) -> int:

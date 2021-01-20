@@ -69,7 +69,7 @@ def mochila_iter_camino(v: List[int], w: List[int], C: int) -> Tuple[int, List[i
     for n in range(1, N+1):
         for c in range(C + 1):
             if w[n - 1] <= c:  # Objeto cabe en la mochila, vemos el máximo beneficio
-                mem[n, c] = max( (mem[n - 1, c][0], (n-1, c, 0)),
+                mem[n, c] = max((mem[n - 1, c][0], (n-1, c, 0)),
                                     (mem[n - 1, c - w[n - 1]][0] + v[n - 1], (n-1, c-w[n-1], 1)))
             else:  # Objeto no cabe en la mochila
                 mem[n, c] = mem[n - 1, c][0], (n-1, c, 0)
