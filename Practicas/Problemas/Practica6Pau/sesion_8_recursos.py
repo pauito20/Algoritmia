@@ -48,7 +48,7 @@ def recursos_rec_mem_camino(v: Dict[Tuple[int, int], int], m: List[int], U: int)
     n, u = N, U
     # --------------------
     while n != 0:
-        _, (n, u, k) = mem[n, u]  # Nos interesa la x que e sla decisión tomada para ponerla en "sol"
+        _, (n, u, k) = mem[n, u]  # Nos interesa la k que e sla decisión tomada para ponerla en "sol"
         sol.append(k)
     sol.reverse() #Damos la vuelta a sol que esta al revés
     # --------------------

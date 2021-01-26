@@ -52,7 +52,8 @@ def mochila_rec_mem_camino(v: List[int], w: List[int], C: int) -> Tuple[int, Lis
     sol = []
     n, c = N, C
     while n != 0:
-        _, (n, c, x) = mem[n, c] #Nos interesa la x que e sla decisión tomada para ponerla en "sol"
+        _, (n_prev, c_prev, x) = mem[n, c] #Nos interesa la x que e sla decisión tomada para ponerla en "sol"
+        n, c = n_prev, c_prev
         sol.append(x)
     sol.reverse()
     return score, sol
