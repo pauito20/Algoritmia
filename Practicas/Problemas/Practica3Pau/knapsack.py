@@ -60,8 +60,8 @@ def create_knapsack_problem(num_objects: int) -> Tuple[Tuple[int, ...], Tuple[in
 
 # Programa principal ------------------------------------------
 if __name__ == "__main__":
-    W, V, C = [1, 4, 2, 3], [2, 3, 4, 2], 7  # SOLUCIÓN: Weight=7,    Value=9
-    # W, V, C = create_knapsack_problem(30)     # SOLUCIÓN: Weight=6313, Value=11824
+    #W, V, C = [1, 4, 2, 3], [2, 3, 4, 2], 7  # SOLUCIÓN: Weight=7,    Value=9
+    W, V, C = create_knapsack_problem(30)     # SOLUCIÓN: Weight=6313, Value=11824
     for sol in knapsack_solve(W, V, C):
         w = sum(W[i] * m for i, m in enumerate(sol))
         v = sum(V[i] * m for i, m in enumerate(sol))
